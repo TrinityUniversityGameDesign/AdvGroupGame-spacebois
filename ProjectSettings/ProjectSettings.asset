@@ -10,8 +10,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: GameStarter
+  companyName: AdvGameDev1
+  productName: SpaceBois
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13333334, g: 0.17254902, b: 0.21176471, a: 1}
@@ -140,7 +140,7 @@ PlayerSettings:
     Android: com.Company.ProductName
     Standalone: unity.DefaultCompany.GameStarter
     Tizen: com.Company.ProductName
-    iOS: com.Company.ProductName
+    iOS: com.advgamedev1.spaceboistest1
     tvOS: com.Company.ProductName
   buildNumber:
     iOS: 0
@@ -162,7 +162,7 @@ PlayerSettings:
     serializedVersion: 2
     m_Bits: 238
   iPhoneSdkVersion: 988
-  iOSTargetOSVersionString: 7.0
+  iOSTargetOSVersionString: 8.0
   tvOSSdkVersion: 0
   tvOSRequireExtendedGameController: 0
   tvOSTargetOSVersionString: 9.0
@@ -282,8 +282,9 @@ PlayerSettings:
     m_Enabled: 0
     m_Devices: []
   - m_BuildTarget: iOS
-    m_Enabled: 0
-    m_Devices: []
+    m_Enabled: 1
+    m_Devices:
+    - cardboard
   - m_BuildTarget: tvOS
     m_Enabled: 0
     m_Devices: []
@@ -314,7 +315,7 @@ PlayerSettings:
   enableInternalProfiler: 0
   logObjCUncaughtExceptions: 1
   enableCrashReportAPI: 0
-  cameraUsageDescription: 
+  cameraUsageDescription: Used to scan QR codes
   locationUsageDescription: 
   microphoneUsageDescription: 
   switchNetLibKey: 
