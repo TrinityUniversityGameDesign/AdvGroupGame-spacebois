@@ -9,10 +9,14 @@ public class PlayerMovement : MonoBehaviour {
 
     public bool isMoving = true;
     public float speed = 1f;
+    public bool keyDetection;
 
 	// Use this for initialization
 	void Start () {
-		
+        if (Application.isEditor)
+        {
+            keyDetection = true;
+        }
 	}
 	
 	// Update is called once per frame
@@ -20,6 +24,28 @@ public class PlayerMovement : MonoBehaviour {
         if(isMoving){
             transform.position = transform.position + Camera.main.transform.forward * speed * Time.deltaTime;
         }
-		
+
+        if(keyDetection){
+            Debug.Log("Key detection active for editor");
+            if(Input.GetKeyDown(KeyCode.DownArrow)){
+                if (speed > 0) speed -= 1f;
+            }
+            else if(Input.GetKeyDown(KeyCode.UpArrow)){
+                speed += 1f;
+            }
+        } else {
+            if (Input.touchCount == 1)
+            {
+                var touch = Input.touches[0];
+                if (touch.position.x < Screen.width / 2)
+                {
+                    if (speed > 0) speed -= 1f;
+                }
+                else if (touch.position.x > Screen.width / 2)
+                {
+                    speed += 1f;
+                }
+            }
+        }
 	}
 }

@@ -11,7 +11,13 @@ public class EditorCameraMovement : MonoBehaviour
     private float yaw = 0.0f;
     private float pitch = 0.0f;
 
-    public bool mouseControlActive = true;
+    public bool mouseControlActive = false;
+
+    void Start(){
+        if(Application.isEditor){
+            mouseControlActive = true;
+        }
+    }
 
     void Update()
     {

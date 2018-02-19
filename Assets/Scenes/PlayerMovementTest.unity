@@ -585,7 +585,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedH: 2
   speedV: 2
-  mouseControlActive: 1
+  mouseControlActive: 0
 --- !u!1 &284918567
 GameObject:
   m_ObjectHideFlags: 0
