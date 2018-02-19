@@ -3,18 +3,26 @@
 --- !u!129 &1
 PlayerSettings:
   m_ObjectHideFlags: 0
+<<<<<<< HEAD
   serializedVersion: 12
+=======
+  serializedVersion: 11
+>>>>>>> master
   productGUID: 8af20e407a29d7645b33de06ceb22503
   AndroidProfiler: 0
   defaultScreenOrientation: 4
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: GameStarter
+  companyName: AdvGameDev1
+  productName: SpaceBois
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
+<<<<<<< HEAD
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
+=======
+  m_SplashScreenBackgroundColor: {r: 0.13333334, g: 0.17254902, b: 0.21176471, a: 1}
+>>>>>>> master
   m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 1
   m_SplashScreenOverlayOpacity: 1
@@ -102,7 +110,10 @@ PlayerSettings:
   xboxOneResolution: 0
   xboxOneMonoLoggingLevel: 0
   xboxOneLoggingLevel: 1
+<<<<<<< HEAD
   xboxOneDisableEsram: 0
+=======
+>>>>>>> master
   videoMemoryForVertexBuffers: 0
   psp2PowerMode: 0
   psp2AcquireBGM: 1
@@ -138,13 +149,20 @@ PlayerSettings:
       depthFormat: 1
   protectGraphicsMemory: 0
   useHDRDisplay: 0
+<<<<<<< HEAD
   targetPixelDensity: 0
   resolutionScalingMode: 0
+=======
+>>>>>>> master
   applicationIdentifier:
     Android: com.Company.ProductName
     Standalone: unity.DefaultCompany.GameStarter
     Tizen: com.Company.ProductName
+<<<<<<< HEAD
     iOS: com.Company.ProductName
+=======
+    iOS: com.advgamedev1.spaceboistest1
+>>>>>>> master
     tvOS: com.Company.ProductName
   buildNumber:
     iOS: 0
@@ -166,7 +184,11 @@ PlayerSettings:
     serializedVersion: 2
     m_Bits: 238
   iPhoneSdkVersion: 988
+<<<<<<< HEAD
   iOSTargetOSVersionString: 7.0
+=======
+  iOSTargetOSVersionString: 8.0
+>>>>>>> master
   tvOSSdkVersion: 0
   tvOSRequireExtendedGameController: 0
   tvOSTargetOSVersionString: 9.0
@@ -212,7 +234,11 @@ PlayerSettings:
   iOSURLSchemes: []
   iOSBackgroundModes: 0
   iOSMetalForceHardShadows: 0
+<<<<<<< HEAD
   metalEditorSupport: 1
+=======
+  metalEditorSupport: 0
+>>>>>>> master
   metalAPIValidation: 1
   iOSRenderExtraFrameOnPause: 1
   appleDeveloperTeamID: 
@@ -286,8 +312,14 @@ PlayerSettings:
     m_Enabled: 0
     m_Devices: []
   - m_BuildTarget: iOS
+<<<<<<< HEAD
     m_Enabled: 0
     m_Devices: []
+=======
+    m_Enabled: 1
+    m_Devices:
+    - cardboard
+>>>>>>> master
   - m_BuildTarget: tvOS
     m_Enabled: 0
     m_Devices: []
@@ -318,7 +350,11 @@ PlayerSettings:
   enableInternalProfiler: 0
   logObjCUncaughtExceptions: 1
   enableCrashReportAPI: 0
+<<<<<<< HEAD
   cameraUsageDescription: 
+=======
+  cameraUsageDescription: Used to scan QR codes
+>>>>>>> master
   locationUsageDescription: 
   microphoneUsageDescription: 
   switchNetLibKey: 
@@ -381,7 +417,11 @@ PlayerSettings:
   switchAccessibleURLs: 
   switchLegalInformation: 
   switchMainThreadStackSize: 1048576
+<<<<<<< HEAD
   switchPresenceGroupId: 0x01004b9000490000
+=======
+  switchPresenceGroupId: 
+>>>>>>> master
   switchLogoHandling: 0
   switchReleaseVersion: 0
   switchDisplayVersion: 1.0.0
@@ -393,8 +433,13 @@ PlayerSettings:
   switchUserAccountSaveDataSize: 0
   switchUserAccountSaveDataJournalSize: 0
   switchApplicationAttribute: 0
+<<<<<<< HEAD
   switchCardSpecSize: 4
   switchCardSpecClock: 25
+=======
+  switchCardSpecSize: -1
+  switchCardSpecClock: -1
+>>>>>>> master
   switchRatingsMask: 0
   switchRatingsInt_0: 0
   switchRatingsInt_1: 0
@@ -408,7 +453,11 @@ PlayerSettings:
   switchRatingsInt_9: 0
   switchRatingsInt_10: 0
   switchRatingsInt_11: 0
+<<<<<<< HEAD
   switchLocalCommunicationIds_0: 0x01004b9000490000
+=======
+  switchLocalCommunicationIds_0: 
+>>>>>>> master
   switchLocalCommunicationIds_1: 
   switchLocalCommunicationIds_2: 
   switchLocalCommunicationIds_3: 
@@ -475,7 +524,11 @@ PlayerSettings:
   ps4ReprojectionSupport: 0
   ps4UseAudio3dBackend: 0
   ps4SocialScreenEnabled: 0
+<<<<<<< HEAD
   ps4ScriptOptimizationLevel: 0
+=======
+  ps4ScriptOptimizationLevel: 3
+>>>>>>> master
   ps4Audio3dVirtualSpeakerCount: 14
   ps4attribCpuUsage: 0
   ps4PatchPkgPath: 
@@ -567,7 +620,10 @@ PlayerSettings:
     iOS: 1
   incrementalIl2cppBuild: {}
   additionalIl2CppArgs: 
+<<<<<<< HEAD
   scriptingRuntimeVersion: 0
+=======
+>>>>>>> master
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
@@ -659,11 +715,19 @@ PlayerSettings:
     Purchasing: 0
     UNet: 0
     Unity_Ads: 0
+<<<<<<< HEAD
   facebookSdkVersion: 7.9.4
+=======
+  facebookSdkVersion: 7.9.1
+>>>>>>> master
   apiCompatibilityLevel: 2
   cloudProjectId: 
   projectName: 
   organizationId: 
   cloudEnabled: 0
+<<<<<<< HEAD
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
+=======
+  enableNewInputSystem: 0
+>>>>>>> master
