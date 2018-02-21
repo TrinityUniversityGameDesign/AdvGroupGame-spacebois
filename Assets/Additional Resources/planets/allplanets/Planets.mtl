@@ -1,0 +1,14 @@
+newmtl PlanetsA_mat
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+map_Kd Planets_A_BaseColor.png
+newmtl PlanetsB_mat
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+map_Kd Planets_B_BaseColor.png
