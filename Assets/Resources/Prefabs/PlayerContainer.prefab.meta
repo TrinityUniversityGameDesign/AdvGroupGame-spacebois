@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 596e216a6a3baeb43b64004a0fead9eb
 timeCreated: 1519076026
+=======
+guid: 78151dd6b1a474e1d8b16e4dcd457d5e
+timeCreated: 1519171803
+>>>>>>> origin/player-movement
 licenseType: Free
 NativeFormatImporter:
   mainObjectFileID: 100100000
