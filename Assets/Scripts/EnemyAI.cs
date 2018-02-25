@@ -51,6 +51,12 @@ public class EnemyAI : MonoBehaviour {
 				numPlayers -= 1;
 				//Setting the state to Inactive, since we have killed our target. 
 				curState = EnemyState.Inactive;
+
+                /*
+                 * cmw adding game ending transition
+                 */
+
+                
 		}
 	}
 
