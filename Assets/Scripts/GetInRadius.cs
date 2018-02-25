@@ -11,16 +11,24 @@ public class GetInRadius : MonoBehaviour {
 
 	public float radius; 
 	public float speed;
+	public float randomWait;
+	private float time;
 
 	public GameObject targetPlayer;
 
+	void SetRandomTime(){
+        randomWait = Random.Range(3, 5);
+	}
+
 	// Use this for initialization
 	void Start () {
+		time = 0;
+		SetRandomTime ();
 		
 		do {
-			targetX = Random.Range (targetPlayer.transform.position.x - radius, targetPlayer.transform.position.x + radius);
-			targetY = Random.Range (targetPlayer.transform.position.y - radius, targetPlayer.transform.position.y + radius);
-			targetZ = Random.Range (targetPlayer.transform.position.z - radius, targetPlayer.transform.position.z + radius);
+			targetX = Random.Range(targetPlayer.transform.position.x - radius, targetPlayer.transform.position.x + radius);
+			targetY = Random.Range(targetPlayer.transform.position.y - radius, targetPlayer.transform.position.y + radius);
+			targetZ = Random.Range(targetPlayer.transform.position.z - radius, targetPlayer.transform.position.z + radius);
 		} while (targetX * targetX + targetY * targetY + targetZ * targetZ > radius * radius);
 
 		targetTransform = new Vector3(targetX, targetY, targetZ);
@@ -29,18 +37,24 @@ public class GetInRadius : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
 
 		float step = speed * Time.deltaTime;
 
 		if (Vector3.Distance (transform.position, targetTransform) < 2) {
+			time += Time.deltaTime;
+		}
+
+		if(time > randomWait){
 			do {
 				targetX = Random.Range (targetPlayer.transform.position.x - radius, targetPlayer.transform.position.x + radius);
 				targetY = Random.Range (targetPlayer.transform.position.y - radius, targetPlayer.transform.position.y + radius);
 				targetZ = Random.Range (targetPlayer.transform.position.z - radius, targetPlayer.transform.position.z + radius);
 			} while (targetX * targetX + targetY * targetY + targetZ * targetZ > radius * radius);
 			targetTransform = new Vector3(targetX, targetY, targetZ);
+			time = 0; 
+			SetRandomTime ();
 		} else {
 			transform.position = Vector3.MoveTowards (transform.position, targetTransform, step);
 		}
