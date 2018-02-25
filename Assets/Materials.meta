@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+guid: 0acb17a6569a9154186f66668d1ed4e4
+folderAsset: yes
+timeCreated: 1518996056
+=======
 guid: d931966c67011416191f18829e647630
 folderAsset: yes
 timeCreated: 1518491499
+>>>>>>> origin/player-movement
 licenseType: Free
 DefaultImporter:
   userData: 
