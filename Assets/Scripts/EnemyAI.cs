@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyAI : MonoBehaviour {
 
@@ -19,6 +20,7 @@ public class EnemyAI : MonoBehaviour {
 	} 
 
 	void Update(){
+        numPlayers = GameObject.FindGameObjectsWithTag("Player").Length;
 		switch (curState) 
 		{
 			case EnemyState.Inactive:
@@ -52,10 +54,14 @@ public class EnemyAI : MonoBehaviour {
 				//Setting the state to Inactive, since we have killed our target. 
 				curState = EnemyState.Inactive;
 
-                /*
-                 * cmw adding game ending transition
-                 */
+            /*
+             * cmw adding game ending transition
+             */
 
+            Debug.LogWarning("DEAD");
+
+
+               SceneManager.LoadScene("DeadTest");
                 
 		}
 	}

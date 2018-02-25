@@ -8,6 +8,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/PlayerMovementTest.unity
     guid: a9f47b776592a4e4ab0ea19e77433a8d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PlayerNetworking.unity
     guid: 1ec9bb283b623174bb2c92b37e75dfd3
+  - enabled: 1
+    path: Assets/Scenes/PlayerWorldTest.unity
+    guid: fd79682f5eb5f4c14ba1b7bac4d46d53
+  - enabled: 1
+    path: Assets/Scenes/DeadTest.unity
+    guid: 584bab19a5f494c30b4cad6deaced0c0
