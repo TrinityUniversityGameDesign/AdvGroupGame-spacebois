@@ -19,7 +19,7 @@ public class InteractiveItem : MonoBehaviour {
             timer += Time.deltaTime;
 
             if(timer >= gazeTime){
-                GetComponent<Rigidbody>().useGravity = true;
+                GetComponent<Rigidbody>().AddForce(0,100,0);
             }
         }
 	}
