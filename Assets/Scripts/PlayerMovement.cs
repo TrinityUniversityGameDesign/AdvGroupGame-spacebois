@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if(isMoving){
-            transform.position = transform.position + Camera.main.transform.forward * speed * Time.deltaTime;
+            transform.position = transform.position + transform.forward * speed * Time.deltaTime;
         }
 
         if(keyDetection){
