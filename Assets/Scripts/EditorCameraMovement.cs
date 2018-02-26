@@ -27,5 +27,9 @@ public class EditorCameraMovement : MonoBehaviour
             pitch -= speedV * Input.GetAxis("Mouse Y");
             transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
         }
+        else
+        {
+            transform.rotation = Camera.main.transform.rotation;
+        }
     }
 }
