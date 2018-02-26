@@ -14,7 +14,8 @@ public class EditorCameraMovement : MonoBehaviour
     public bool mouseControlActive = false;
 
     void Start(){
-        if(Application.isEditor){
+        if(Application.isEditor == true || Application.platform == RuntimePlatform.WindowsPlayer)
+        {
             mouseControlActive = true;
         }
     }
@@ -26,10 +27,6 @@ public class EditorCameraMovement : MonoBehaviour
             yaw += speedH * Input.GetAxis("Mouse X");
             pitch -= speedV * Input.GetAxis("Mouse Y");
             transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
-        }
-        else
-        {
-            transform.rotation = Camera.main.transform.rotation;
         }
     }
 }
