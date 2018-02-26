@@ -11,17 +11,21 @@ public class GetInRadius : MonoBehaviour {
 
 	public float radius; 
 	public float speed;
+    private float time;
+    private float randomTime;
 
 	public GameObject targetPlayer;
 
-	// Use this for initialization
+    void SetRandomTime() {
+        randomTime = Random.Range(1, 5);
+    }
+
 	void Start () {
-		
-		do {
-			targetX = Random.Range (targetPlayer.transform.position.x - radius, targetPlayer.transform.position.x + radius);
-			targetY = Random.Range (targetPlayer.transform.position.y - radius, targetPlayer.transform.position.y + radius);
-			targetZ = Random.Range (targetPlayer.transform.position.z - radius, targetPlayer.transform.position.z + radius);
-		} while (targetX * targetX + targetY * targetY + targetZ * targetZ > radius * radius);
+        time = 0;
+        SetRandomTime();
+		targetX = Random.Range (targetPlayer.transform.position.x - radius, targetPlayer.transform.position.x + radius);
+		targetY = Random.Range (targetPlayer.transform.position.y - radius, targetPlayer.transform.position.y + radius);
+		targetZ = Random.Range (targetPlayer.transform.position.z - radius, targetPlayer.transform.position.z + radius);
 
 		targetTransform = new Vector3(targetX, targetY, targetZ);
 
@@ -34,13 +38,17 @@ public class GetInRadius : MonoBehaviour {
 
 		float step = speed * Time.deltaTime;
 
-		if (Vector3.Distance (transform.position, targetTransform) < 2) {
-			do {
-				targetX = Random.Range (targetPlayer.transform.position.x - radius, targetPlayer.transform.position.x + radius);
-				targetY = Random.Range (targetPlayer.transform.position.y - radius, targetPlayer.transform.position.y + radius);
-				targetZ = Random.Range (targetPlayer.transform.position.z - radius, targetPlayer.transform.position.z + radius);
-			} while (targetX * targetX + targetY * targetY + targetZ * targetZ > radius * radius);
+        if (Vector3.Distance(transform.position, targetTransform) < 2) {
+            time += Time.deltaTime;
+        }
+        if(time > randomTime) {
+            time = 0;
+            SetRandomTime();
+			targetX = Random.Range (targetPlayer.transform.position.x - radius, targetPlayer.transform.position.x + radius);
+			targetY = Random.Range (targetPlayer.transform.position.y - radius, targetPlayer.transform.position.y + radius);
+			targetZ = Random.Range (targetPlayer.transform.position.z - radius, targetPlayer.transform.position.z + radius);
 			targetTransform = new Vector3(targetX, targetY, targetZ);
+            transform.LookAt(targetTransform);
 		} else {
 			transform.position = Vector3.MoveTowards (transform.position, targetTransform, step);
 		}
