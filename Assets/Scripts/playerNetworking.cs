@@ -10,8 +10,8 @@ public class playerNetworking : MonoBehaviour {
         {
             GetComponent<PlayerMovement>().enabled = false;
             GetComponent<EditorCameraMovement>().enabled = false;
-            GetComponent<Camera>().enabled = false;
-            //transform.GetChild(0).GetComponent<Camera>().enabled = false;
+            //GetComponent<Camera>().enabled = false;
+            transform.GetChild(0).GetComponent<Camera>().enabled = false;
         }
 	}
 	
