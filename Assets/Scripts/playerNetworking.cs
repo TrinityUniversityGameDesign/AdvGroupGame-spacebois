@@ -9,9 +9,10 @@ public class playerNetworking : MonoBehaviour {
         if (!GetComponent<PhotonView>().isMine)
         {
             GetComponent<PlayerMovement>().enabled = false;
-            GetComponent<EditorCameraMovement>().enabled = false;
+            //GetComponent<EditorCameraMovement>().enabled = false;
             //GetComponent<Camera>().enabled = false;
             transform.GetChild(0).GetComponent<Camera>().enabled = false;
+            
         }
 	}
 	
