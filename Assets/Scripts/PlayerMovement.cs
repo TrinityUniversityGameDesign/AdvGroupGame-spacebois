@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour {
         }
         if (GetComponent<PhotonView>().isMine)
         {
+            //cockpit.transform.rotation = Quaternion.Euler(Quaternion.RotateTowards(cockpit.transform.rotation, targetRotation, turningRate * Time.deltaTime) * (cockpit.transform.position - Camera.main.transform.forward) + Camera.main.transform.forward);
             cockpit.transform.rotation = Quaternion.RotateTowards(cockpit.transform.rotation, targetRotation, turningRate * Time.deltaTime);
             Camera.main.gameObject.transform.localPosition = Vector3.zero;
         }
