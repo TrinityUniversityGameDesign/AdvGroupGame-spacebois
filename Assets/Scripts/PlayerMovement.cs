@@ -30,7 +30,11 @@ public class PlayerMovement : MonoBehaviour {
             transform.position = transform.position + Camera.main.transform.forward * speed * Time.deltaTime;
             if (GetComponent<PhotonView>().isMine) targetRotation = Camera.main.transform.rotation;
         }
-        if (GetComponent<PhotonView>().isMine) cockpit.transform.rotation = Quaternion.RotateTowards(cockpit.transform.rotation, targetRotation, turningRate * Time.deltaTime);
+        if (GetComponent<PhotonView>().isMine)
+        {
+            cockpit.transform.rotation = Quaternion.RotateTowards(cockpit.transform.rotation, targetRotation, turningRate * Time.deltaTime);
+            Camera.main.gameObject.transform.localPosition = Vector3.zero;
+        }
         if (keyDetection){
             Debug.Log("Key detection active for editor");
             if(Input.GetKeyDown(KeyCode.DownArrow)){
