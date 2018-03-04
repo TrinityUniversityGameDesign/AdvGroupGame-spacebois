@@ -28,7 +28,7 @@ public class RadarController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //transform.rotation = Quaternion.identity;
+        transform.rotation = Quaternion.identity;
         int planetCount = 0;
         int playerCount = 0;
         foreach (GameObject g in GameObject.FindGameObjectsWithTag("Planet"))
