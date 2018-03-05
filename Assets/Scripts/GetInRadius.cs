@@ -81,13 +81,13 @@ void Start()
         {
             transform.position = Vector3.MoveTowards(transform.position, targetTransform, step);
             print(Quaternion.Inverse(_lookRotation) * transform.rotation);
-            if (differenceOfRotation(_lookRotation, transform.rotation) > 0.2)
+            if (differenceOfRotation(_lookRotation, transform.rotation) > 0.1)
                 transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * rotationSpeed);
             else {
 
-                targetX = Random.Range(targetX - 1, targetX + 1);
-                targetY = Random.Range(targetY - 1, targetY + 1);
-                targetZ = Random.Range(targetZ - 1, targetZ + 1);
+                targetX = Random.Range(targetX - 0.75f, targetX + 0.75f);
+                targetY = Random.Range(targetY - 0.75f, targetY + 0.75f);
+                targetZ = Random.Range(targetZ - 0.75f, targetZ + 0.75f);
                 lookTransform = new Vector3(targetX, targetY, targetZ);
                 _direction = (lookTransform - transform.position).normalized;
                 _lookRotation = Quaternion.LookRotation(_direction);
