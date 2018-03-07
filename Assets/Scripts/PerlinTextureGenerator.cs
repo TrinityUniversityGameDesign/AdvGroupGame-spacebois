@@ -5,6 +5,8 @@ using UnityEngine;
 public class PerlinTextureGenerator : MonoBehaviour {
     Texture2D texture;
     public int resolution = 128;
+    public float steps;
+    public float percentSea;
 	// Use this for initialization
 	void Start () {
         texture = new Texture2D(resolution, resolution, TextureFormat.RGB24, true);
@@ -20,7 +22,11 @@ public class PerlinTextureGenerator : MonoBehaviour {
         {
             for (int x = 0; x < resolution; x++)
             {
-                texture.SetPixel(x, y, new Color(x * stepSize, y * stepSize, 0f));
+                float val = Mathf.PerlinNoise(x * stepSize * steps, y * stepSize * steps);
+                Color currCol = Color.blue;
+                if (val > percentSea)
+                    currCol = Color.green;
+                texture.SetPixel(x, y, currCol);
             }
         }
         texture.Apply();

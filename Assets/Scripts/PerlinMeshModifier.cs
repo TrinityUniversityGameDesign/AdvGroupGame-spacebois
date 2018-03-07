@@ -14,9 +14,18 @@ public class PerlinMeshModifier : MonoBehaviour {
         foreach(Vector3 v in verts)
         {
             Vector3 vertPos = transform.TransformPoint(v);
-            //Debug.Log(vertPos);
-            newVerts[i] = vertPos + Vector3.one * Mathf.PerlinNoise(vertPos.x, vertPos.y);
-            i++;
+            if(vertPos.x > 0)
+            {
+                //Debug.Log(vertPos);
+                newVerts[i] = vertPos + Vector3.one * Mathf.PerlinNoise(vertPos.x*0.01f, vertPos.y * 0.01f);
+                i++;
+            }
+            else
+            {
+                newVerts[i] = vertPos;
+                i++;
+            }
+            
         }
         mesh.vertices = newVerts;
         mesh.RecalculateBounds();
