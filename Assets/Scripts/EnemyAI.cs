@@ -1,33 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class EnemyAI : MonoBehaviour {
 
 	public float speed; 
 	public float radius; 
 
-	public int numPlayers;
 	enum EnemyState {Inactive,Search,Wander};
 	EnemyState curState;
  
  	public Transform loc;
+    public GameObject[] players;
 
 	void Start(){
-		numPlayers = GameObject.FindGameObjectsWithTag("Player").Length;
 		curState = EnemyState.Inactive;
+        players = GameObject.FindGameObjectsWithTag("Player");
 	} 
 
 	void Update(){
         if (GetComponent<PhotonView>().isMine)
         {
-            numPlayers = GameObject.FindGameObjectsWithTag("Player").Length;
             switch (curState)
             {
                 case EnemyState.Inactive:
                     //Should maybe consider not having to store the number of players? 
-                    if (numPlayers > 0) { curState = EnemyState.Search; }
+                    if (players.Length > 0) { curState = EnemyState.Search; }
+                    else {  StartCoroutine(waitSearch());  }
                     break;
                 case EnemyState.Search:
                     FindPlayer();
@@ -38,6 +37,12 @@ public class EnemyAI : MonoBehaviour {
             }
         }
 	}
+
+    //could probably just change to an update in player instantiation?
+    private IEnumerator waitSearch(){
+        yield return new WaitForSecondsRealtime(1);
+        players = GameObject.FindGameObjectsWithTag("Player");
+    }
 
 	//Maybe have this take in the argument Transform loc?
 	public void GoToLocation(){
@@ -52,27 +57,26 @@ public class EnemyAI : MonoBehaviour {
 		else{
 				//This would mean distance < 2
 				//Player dead maybe? 
-				loc.gameObject.tag = "Dead";
-				numPlayers -= 1;
+				//numPlayers -= 1;
 				//Setting the state to Inactive, since we have killed our target. 
+                loc.gameObject.GetComponent<playerDeath>().die();
 				curState = EnemyState.Inactive;
-
+                //Might want to change from array to just have the removal of the dead player?
+                players = new GameObject[0]; 
             /*
              * cmw adding game ending transition
              */
-
-            Debug.LogWarning("DEAD");
-
-
-               SceneManager.LoadScene("DeadTest");
-                
+            /*
+             *   bjo changing game ending transistion to occur in player
+             */
+            Debug.LogWarning("ENEMY CALLING DEAD");
 		}
 	}
 
 	public void FindPlayer(){
 
-		GameObject[] players;
-        players = GameObject.FindGameObjectsWithTag("Player");
+		//GameObject[] players;
+        //players = GameObject.FindGameObjectsWithTag("Player");
         GameObject closest = null;
         float distance = Mathf.Infinity;
         Vector3 position = transform.position;
@@ -87,7 +91,6 @@ public class EnemyAI : MonoBehaviour {
             }
         }
         loc = closest.transform;
-
         //Setting the state to follow after; 
         curState = EnemyState.Wander;
 	}
