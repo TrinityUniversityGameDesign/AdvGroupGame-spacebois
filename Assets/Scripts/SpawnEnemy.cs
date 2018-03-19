@@ -8,6 +8,7 @@ public class SpawnEnemy : MonoBehaviour
     public int maxEnemies = 10; 
     public GameObject enemy;
     public GameObject[] enemies; 
+    //public GameObject[] players; 
 
     // Use this for initialization
     void Start()
@@ -39,7 +40,7 @@ public class SpawnEnemy : MonoBehaviour
             numEnemies++;
 
             foreach (GameObject e in enemies){
-                e.GetComponent<EnemyAI>().UpdateState();
+                if(e != null) e.GetComponent<EnemyAI>().UpdateState();
             }
         }
 

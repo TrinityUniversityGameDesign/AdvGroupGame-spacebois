@@ -40,7 +40,7 @@ public class EnemyAI : MonoBehaviour {
 
     //could probably just change to an update in player instantiation?
     private IEnumerator waitSearch(){
-        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSecondsRealtime(3);
         players = GameObject.FindGameObjectsWithTag("Player");
     }
 
@@ -93,7 +93,8 @@ public class EnemyAI : MonoBehaviour {
         curState = EnemyState.Wander;
 	}
 
-    public void UpdateState(){
-        curState = EnemyState.Search;
+    public void UpdateState(){ 
+        players = players = new GameObject[0]; 
+        curState = EnemyState.Inactive;    
     }
 }
