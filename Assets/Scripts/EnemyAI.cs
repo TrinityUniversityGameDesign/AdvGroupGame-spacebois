@@ -7,7 +7,7 @@ public class EnemyAI : MonoBehaviour {
 	public float speed; 
 	public float radius; 
 
-	enum EnemyState {Inactive,Search,Wander};
+	public enum EnemyState {Inactive,Search,Wander};
 	EnemyState curState;
  
  	public Transform loc;
@@ -55,14 +55,11 @@ public class EnemyAI : MonoBehaviour {
 				//Debug.Log(transform.position);
 			}
 		else{
-				//This would mean distance < 2
-				//Player dead maybe? 
-				//numPlayers -= 1;
-				//Setting the state to Inactive, since we have killed our target. 
-                loc.gameObject.GetComponent<playerDeath>().die();
-				curState = EnemyState.Inactive;
-                //Might want to change from array to just have the removal of the dead player?
-                players = new GameObject[0]; 
+			//Setting the state to Inactive, since we have killed our target. 
+            loc.gameObject.GetComponent<playerDeath>().die();
+		  	curState = EnemyState.Inactive;
+            //Might want to change from array to just have the removal of the dead player?
+            players = new GameObject[0]; 
             /*
              * cmw adding game ending transition
              */
@@ -76,7 +73,8 @@ public class EnemyAI : MonoBehaviour {
 	public void FindPlayer(){
 
 		//GameObject[] players;
-        //players = GameObject.FindGameObjectsWithTag("Player");
+        //keeping call for network test
+        players = GameObject.FindGameObjectsWithTag("Player");
         GameObject closest = null;
         float distance = Mathf.Infinity;
         Vector3 position = transform.position;
@@ -95,5 +93,7 @@ public class EnemyAI : MonoBehaviour {
         curState = EnemyState.Wander;
 	}
 
-
+    public void UpdateState(){
+        curState = EnemyState.Search;
+    }
 }

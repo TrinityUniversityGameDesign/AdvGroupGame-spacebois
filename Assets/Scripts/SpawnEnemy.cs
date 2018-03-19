@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class SpawnEnemy : MonoBehaviour
 {
+    public int numEnemies;
+    public int maxEnemies = 10; 
     public GameObject enemy;
+    public GameObject[] enemies; 
+
     // Use this for initialization
     void Start()
     {
-
+        numEnemies = 0;
+        enemies = new GameObject[maxEnemies];
     }
 
     // Update is called once per frame
@@ -19,10 +24,10 @@ public class SpawnEnemy : MonoBehaviour
 
     public void OnJoinedRoom()
     {
-        
        if (PhotonNetwork.isMasterClient)
         {
-            PhotonNetwork.Instantiate(enemy.name, transform.position, Quaternion.identity, 0);
+            enemies[numEnemies] = PhotonNetwork.Instantiate(enemy.name, transform.position, Quaternion.identity, 0);
+            numEnemies++;
         }
 
     }
@@ -30,8 +35,14 @@ public class SpawnEnemy : MonoBehaviour
 
         if (PhotonNetwork.isMasterClient)
         {
-            PhotonNetwork.Instantiate(enemy.name, transform.position, Quaternion.identity, 0);
+            enemies[numEnemies] = PhotonNetwork.Instantiate(enemy.name, transform.position, Quaternion.identity, 0);  
+            numEnemies++;
+
+            foreach (GameObject e in enemies){
+                e.GetComponent<EnemyAI>().UpdateState();
+            }
         }
+
 
     }
 }
