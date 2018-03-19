@@ -19,10 +19,18 @@ public class SpawnEnemy : MonoBehaviour
 
     public void OnJoinedRoom()
     {
-        PhotonNetwork.Instantiate(enemy.name, transform.position, Quaternion.identity, 0);
         
+       if (PhotonNetwork.isMasterClient)
+        {
+            PhotonNetwork.Instantiate(enemy.name, transform.position, Quaternion.identity, 0);
+        }
+
+    }
+    public void OnPhotonPlayerConnected(PhotonPlayer other){
+
         if (PhotonNetwork.isMasterClient)
         {
+            PhotonNetwork.Instantiate(enemy.name, transform.position, Quaternion.identity, 0);
         }
 
     }
