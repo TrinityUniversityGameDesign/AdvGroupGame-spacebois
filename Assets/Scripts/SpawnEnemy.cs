@@ -8,6 +8,7 @@ public class SpawnEnemy : MonoBehaviour
     public int maxEnemies = 10; 
     public GameObject enemy;
     public GameObject[] enemies; 
+    public GameObject[] players;
     //public GameObject[] players; 
 
     // Use this for initialization
@@ -28,6 +29,8 @@ public class SpawnEnemy : MonoBehaviour
        if (PhotonNetwork.isMasterClient)
         {
             enemies[numEnemies] = PhotonNetwork.Instantiate(enemy.name, transform.position, Quaternion.identity, 0);
+            players = GameObject.FindGameObjectsWithTag("Player"); 
+            enemies[numEnemies].GetComponent<EnemyAI>().SetPlayers(players);
             numEnemies++;
         }
 
@@ -38,12 +41,28 @@ public class SpawnEnemy : MonoBehaviour
         {
             enemies[numEnemies] = PhotonNetwork.Instantiate(enemy.name, transform.position, Quaternion.identity, 0);  
             numEnemies++;
+            players = GameObject.FindGameObjectsWithTag("Player"); 
+            foreach (GameObject en in enemies){
+                if(en != null){
+                    en.GetComponent<EnemyAI>().SetPlayers(players);
+                }
+            }   
+        }
 
-            foreach (GameObject e in enemies){
-                if(e != null) e.GetComponent<EnemyAI>().UpdateState();
+    }
+
+    public void OnPhotonPlayerDisconnected(PhotonPlayer other){
+
+        if (PhotonNetwork.isMasterClient)
+        {
+            foreach (GameObject en in enemies){
+                if(en != null){
+                    en.GetComponent<EnemyAI>().UpdateState();
+                }
             }
         }
 
-
     }
+
+
 }

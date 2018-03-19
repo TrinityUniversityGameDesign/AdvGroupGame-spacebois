@@ -15,7 +15,6 @@ public class EnemyAI : MonoBehaviour {
 
 	void Start(){
 		curState = EnemyState.Inactive;
-        players = GameObject.FindGameObjectsWithTag("Player");
 	} 
 
 	void Update(){
@@ -26,7 +25,7 @@ public class EnemyAI : MonoBehaviour {
                 case EnemyState.Inactive:
                     //Should maybe consider not having to store the number of players? 
                     if (players.Length > 0) { curState = EnemyState.Search; }
-                    else {  StartCoroutine(waitSearch());  }
+                   // else {  StartCoroutine(waitSearch());  }
                     break;
                 case EnemyState.Search:
                     FindPlayer();
@@ -38,11 +37,13 @@ public class EnemyAI : MonoBehaviour {
         }
 	}
 
+    /*
     //could probably just change to an update in player instantiation?
     private IEnumerator waitSearch(){
         yield return new WaitForSecondsRealtime(3);
         players = GameObject.FindGameObjectsWithTag("Player");
     }
+    */
 
 	//Maybe have this take in the argument Transform loc?
 	public void GoToLocation(){
@@ -74,7 +75,7 @@ public class EnemyAI : MonoBehaviour {
 
 		//GameObject[] players;
         //keeping call for network test
-        players = GameObject.FindGameObjectsWithTag("Player");
+        //players = GameObject.FindGameObjectsWithTag("Player");
         GameObject closest = null;
         float distance = Mathf.Infinity;
         Vector3 position = transform.position;
@@ -94,7 +95,11 @@ public class EnemyAI : MonoBehaviour {
 	}
 
     public void UpdateState(){ 
-        players = players = new GameObject[0]; 
+        players = new GameObject[0]; 
         curState = EnemyState.Inactive;    
+    }
+
+    public void SetPlayers(GameObject[] ps){
+        players = ps;
     }
 }
