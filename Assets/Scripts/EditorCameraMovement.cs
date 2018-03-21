@@ -14,7 +14,8 @@ public class EditorCameraMovement : MonoBehaviour
     public bool mouseControlActive = false;
 
     void Start(){
-        if(Application.isEditor){
+        if(Application.isEditor == true || Application.platform == RuntimePlatform.WindowsPlayer)
+        {
             mouseControlActive = true;
         }
     }

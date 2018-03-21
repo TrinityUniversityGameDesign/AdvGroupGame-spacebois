@@ -20,20 +20,23 @@ public class EnemyAI : MonoBehaviour {
 	} 
 
 	void Update(){
-        numPlayers = GameObject.FindGameObjectsWithTag("Player").Length;
-		switch (curState) 
-		{
-			case EnemyState.Inactive:
-			  //Should maybe consider not having to store the number of players? 
-			  if(numPlayers > 0){curState = EnemyState.Search;}
-			  break;
-			case EnemyState.Search:
-			  FindPlayer();
-			  break;
-			case EnemyState.Wander:
-			  GoToLocation();
-			  break;
-		}
+        if (GetComponent<PhotonView>().isMine)
+        {
+            numPlayers = GameObject.FindGameObjectsWithTag("Player").Length;
+            switch (curState)
+            {
+                case EnemyState.Inactive:
+                    //Should maybe consider not having to store the number of players? 
+                    if (numPlayers > 0) { curState = EnemyState.Search; }
+                    break;
+                case EnemyState.Search:
+                    FindPlayer();
+                    break;
+                case EnemyState.Wander:
+                    GoToLocation();
+                    break;
+            }
+        }
 	}
 
 	//Maybe have this take in the argument Transform loc?
