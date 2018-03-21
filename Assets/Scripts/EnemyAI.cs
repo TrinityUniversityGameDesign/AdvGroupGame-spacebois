@@ -57,8 +57,13 @@ public class EnemyAI : MonoBehaviour {
 			}
 		else{
 			//Setting the state to Inactive, since we have killed our target. 
-            loc.gameObject.GetComponent<playerDeath>().die();
-		  	curState = EnemyState.Inactive;
+            Debug.LogWarning("I. ENEMY CALLING KILL PLAYER");
+            GameObject pl = loc.gameObject;
+            int playerKill = pl.GetComponent<KillPlayerRemote>().sPlayer;
+            pl.GetComponent<KillPlayerRemote>().killPlayer(playerKill);
+		  	Debug.LogWarning("II. ENEMY CALLED KILL PLAYER");
+            //loc.gameObject; 
+            curState = EnemyState.Inactive;
             //Might want to change from array to just have the removal of the dead player?
             players = new GameObject[0]; 
             /*
@@ -67,7 +72,7 @@ public class EnemyAI : MonoBehaviour {
             /*
              *   bjo changing game ending transistion to occur in player
              */
-            Debug.LogWarning("ENEMY CALLING DEAD");
+            //Debug.LogWarning("ENEMY CALLING DEAD");
 		}
 	}
 
