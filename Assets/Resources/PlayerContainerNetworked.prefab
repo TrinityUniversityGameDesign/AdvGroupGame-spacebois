@@ -37,10 +37,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4589502246100256}
   - component: {fileID: 114033618813238522}
+  - component: {fileID: 114462066529216154}
   - component: {fileID: 114662847252142012}
   - component: {fileID: 114661481005849320}
   - component: {fileID: 114385562766217572}
   - component: {fileID: 96113135137470534}
+  - component: {fileID: 114082260710514142}
   m_Layer: 0
   m_Name: PlayerContainerNetworked
   m_TagString: Player
@@ -1049,6 +1051,17 @@ MonoBehaviour:
   cockpit: {fileID: 1290868316552470}
   targetRotation: {x: 0, y: 0, z: 0, w: 0}
   turningRate: 50
+--- !u!114 &114082260710514142
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1132744728906992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aade9c1e85bab489ca3a38e34f93346b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114259097365628660
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1107,6 +1120,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cockpit: {fileID: 1836779841731376}
   spaceship: {fileID: 1947206165783146}
+--- !u!114 &114462066529216154
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1132744728906992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c35684592b35f4558a88da6217a01dcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114523599870760308
 MonoBehaviour:
   m_ObjectHideFlags: 1
