@@ -21,7 +21,7 @@ public class SpawnerArea : MonoBehaviour {
 	}
 		
 	public void SpawnPlanets() {
-
+        Random.InitState(123);
 		for(int i = 0; i <= numPlanets; i++) {
 	
 		//gets random point within cube to instantiate gameobjects
@@ -30,8 +30,8 @@ public class SpawnerArea : MonoBehaviour {
 			                                Random.Range (-size.z / 2, size.z / 2));
 		
 		//chooses random planet within array to spawn at random position in cube
-		Instantiate (PlanetToSpawn [Random.Range(0, PlanetToSpawn.Length)], pos, Quaternion.identity);
-	
+		GameObject t = Instantiate (PlanetToSpawn [Random.Range(0, PlanetToSpawn.Length)], pos, Quaternion.identity);
+        t.tag = "Planet";
 	    }
 	}
 
