@@ -23,6 +23,11 @@ public class GetInRadius : MonoBehaviour
     private Vector3 _direction;
 
     public GameObject targetPlayer;
+    
+    //This stuff is for testing with the players
+    private GameObject[] players;
+    private bool fp1, fp2, cp1, cp2;
+    
 
     void SetRandomTime()
     {
@@ -38,6 +43,23 @@ public class GetInRadius : MonoBehaviour
 
 void Start()
     {
+        //ArrayList of players
+        players = GameObject.FindGameObjectsWithTag("Player");
+        float minPlayerDist = 10000;
+        float tempDist;
+        int minPlayer;
+        for(int x = 0; x < players.Length; x++) {
+            tempDist = Vector3.Distance(transform.position, players[x].transform.position);
+            if (tempDist < minPlayerDist)
+            {
+                minPlayer = x;
+                minPlayerDist = tempDist;
+            }
+        }
+
+        //to make color change work with Array, make all green and then make the followed one yellow based on minplayer
+        //follow minplayer
+
         //rotationSpeed = 1.75f;
         time = 0;
         SetRandomTime();
@@ -80,7 +102,7 @@ void Start()
         else
         {
             transform.position = Vector3.MoveTowards(transform.position, targetTransform, step);
-            print(Quaternion.Inverse(_lookRotation) * transform.rotation);
+            //print(Quaternion.Inverse(_lookRotation) * transform.rotation);
             if (differenceOfRotation(_lookRotation, transform.rotation) > 0.1)
                 transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * rotationSpeed);
             else {
@@ -94,6 +116,12 @@ void Start()
             }
 
         }
+        //Checking for players
+        //int layerMask = 1 << 8;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), 10, 1 << 8)){
+            print("I can see the player");
+        }
+
     }
 
     
