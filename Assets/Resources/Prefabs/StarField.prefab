@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 199083710316038270}
   - component: {fileID: 114724001930627294}
   m_Layer: 0
-  m_Name: StarFieldForCamera
+  m_Name: StarFieldEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
