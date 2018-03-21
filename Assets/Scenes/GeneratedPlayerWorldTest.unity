@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 090e8e3bb80d64d88961c67c4f68fcf9, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: a952cc3f1934c4495bd9737eadd952ef, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0007563296, g: 0.0007388737, b: 0.00076527026, a: 1}
+  m_IndirectSpecularColor: {r: 0.11663168, g: 0.31152338, b: 0.35463354, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -183,6 +183,10 @@ Prefab:
     - target: {fileID: 101534, guid: 977b7d7f980b04f289910734fd088c0d, type: 3}
       propertyPath: m_TagString
       value: Planet
+      objectReference: {fileID: 0}
+    - target: {fileID: 101534, guid: 977b7d7f980b04f289910734fd088c0d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 977b7d7f980b04f289910734fd088c0d, type: 3}
@@ -580,6 +584,10 @@ Prefab:
       propertyPath: m_TagString
       value: Planet
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 39588ec761a63476bb3c77fb724f192f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 39588ec761a63476bb3c77fb724f192f, type: 3}
   m_IsPrefabParent: 0
@@ -642,8 +650,74 @@ Prefab:
       propertyPath: m_TagString
       value: Planet
       objectReference: {fileID: 0}
+    - target: {fileID: 100244, guid: 175c515e8a180427585a3bb322d04241, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 175c515e8a180427585a3bb322d04241, type: 3}
+  m_IsPrefabParent: 0
+--- !u!1001 &411832690
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4368397407904778, guid: 75794202dc507477cb8d28c8d3dbb0af, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 35.534355
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368397407904778, guid: 75794202dc507477cb8d28c8d3dbb0af, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 25.364594
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368397407904778, guid: 75794202dc507477cb8d28c8d3dbb0af, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 222.47351
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368397407904778, guid: 75794202dc507477cb8d28c8d3dbb0af, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368397407904778, guid: 75794202dc507477cb8d28c8d3dbb0af, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368397407904778, guid: 75794202dc507477cb8d28c8d3dbb0af, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368397407904778, guid: 75794202dc507477cb8d28c8d3dbb0af, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368397407904778, guid: 75794202dc507477cb8d28c8d3dbb0af, type: 2}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861528238181442, guid: 75794202dc507477cb8d28c8d3dbb0af,
+        type: 2}
+      propertyPath: size.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861528238181442, guid: 75794202dc507477cb8d28c8d3dbb0af,
+        type: 2}
+      propertyPath: size.y
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861528238181442, guid: 75794202dc507477cb8d28c8d3dbb0af,
+        type: 2}
+      propertyPath: size.z
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861528238181442, guid: 75794202dc507477cb8d28c8d3dbb0af,
+        type: 2}
+      propertyPath: numPlanets
+      value: 20
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 75794202dc507477cb8d28c8d3dbb0af, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &418777201
 Prefab:
@@ -699,6 +773,10 @@ Prefab:
     - target: {fileID: 100002, guid: 549ba637eda1c4642a783761215de58b, type: 3}
       propertyPath: m_TagString
       value: Planet
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 549ba637eda1c4642a783761215de58b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 549ba637eda1c4642a783761215de58b, type: 3}
@@ -861,6 +939,10 @@ Prefab:
     - target: {fileID: 100002, guid: aa2a207423754409b87859597f434499, type: 3}
       propertyPath: m_TagString
       value: Planet
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: aa2a207423754409b87859597f434499, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aa2a207423754409b87859597f434499, type: 3}
@@ -1042,6 +1124,10 @@ Prefab:
       propertyPath: m_TagString
       value: Planet
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 3eadbf93e92514102a4b5f5e95f0a46b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3eadbf93e92514102a4b5f5e95f0a46b, type: 3}
   m_IsPrefabParent: 0
@@ -1152,7 +1238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numEnemies: 0
   maxEnemies: 10
-  enemy: {fileID: 1063893875231220, guid: a3676d81c8d124b71b95ce21698196c4, type: 2}
+  enemy: {fileID: 1974074719273980, guid: 68746e73a5865b848a2dd58e2a414586, type: 2}
   enemies: []
   players: []
   playerIDs: 
@@ -1343,6 +1429,10 @@ Prefab:
       propertyPath: m_TagString
       value: Planet
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 018699f1ab45440dca9561282c7606da, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 018699f1ab45440dca9561282c7606da, type: 3}
   m_IsPrefabParent: 0
@@ -1404,6 +1494,10 @@ Prefab:
     - target: {fileID: 100002, guid: 3fe2a3772c5434314a088c574178c501, type: 3}
       propertyPath: m_TagString
       value: Planet
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 3fe2a3772c5434314a088c574178c501, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3fe2a3772c5434314a088c574178c501, type: 3}
@@ -5148,6 +5242,10 @@ Prefab:
       propertyPath: m_TagString
       value: Home
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 399ffe386a7fe4d21bdfb5ebbf5bdd90, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 399ffe386a7fe4d21bdfb5ebbf5bdd90, type: 3}
   m_IsPrefabParent: 0
@@ -5380,6 +5478,10 @@ Prefab:
       propertyPath: m_TagString
       value: Planet
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 321cc9695b9884b7f8a9ab2f56bd0829, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 321cc9695b9884b7f8a9ab2f56bd0829, type: 3}
   m_IsPrefabParent: 0
@@ -5461,6 +5563,10 @@ Prefab:
     - target: {fileID: 100002, guid: 5c73d350efac74b3abbab602bd8c9388, type: 3}
       propertyPath: m_TagString
       value: Planet
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 5c73d350efac74b3abbab602bd8c9388, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5c73d350efac74b3abbab602bd8c9388, type: 3}
@@ -5795,6 +5901,10 @@ Prefab:
       propertyPath: m_TagString
       value: Planet
       objectReference: {fileID: 0}
+    - target: {fileID: 1067687911596006, guid: 00afb16afc6364b8295299b8268c9e02, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 00afb16afc6364b8295299b8268c9e02, type: 2}
   m_IsPrefabParent: 0
@@ -5978,6 +6088,10 @@ Prefab:
     - target: {fileID: 4922648608785020, guid: 581bdcf57bbe8e241a4cf91f4373bf6d, type: 2}
       propertyPath: m_RootOrder
       value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416204183875714, guid: 581bdcf57bbe8e241a4cf91f4373bf6d, type: 2}
+      propertyPath: m_TagString
+      value: Home
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 581bdcf57bbe8e241a4cf91f4373bf6d, type: 2}
