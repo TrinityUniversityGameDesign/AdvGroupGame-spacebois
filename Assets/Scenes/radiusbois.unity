@@ -487,6 +487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 15
   speed: 10
+  rotationSpeed: 10
   targetPlayer: {fileID: 1679868655}
 --- !u!1 &1103970925
 GameObject:
