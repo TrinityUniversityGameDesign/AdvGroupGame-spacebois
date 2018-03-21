@@ -61,7 +61,7 @@ public class EnemyAI : MonoBehaviour {
 		else{
 			//Setting the state to Inactive, since we have killed our target. 
             Debug.LogWarning("I. ENEMY CALLING KILL PLAYER");
-            int playerKill = playerIDs[System.Array.IndexOf(players,play)];
+            int playerKill = playerIDs[System.Array.IndexOf(players,loc.gameObject)];
             GameObject pl = loc.gameObject;
             pl.GetComponent<KillPlayerRemote>().killPlayer(playerKill);
 		  	Debug.LogWarning("II. ENEMY CALLED KILL PLAYER");

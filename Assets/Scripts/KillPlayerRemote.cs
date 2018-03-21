@@ -27,10 +27,10 @@ public class KillPlayerRemote : MonoBehaviour
     }
 
     public void killPlayer(int playerID){
-        Debug.LogWarning("i. PLAYER CALLING KILL PLAYER");
+        Debug.LogWarning("i. HOST CALLING KILL PLAYER"+playerID);
         PhotonView photonView = PhotonView.Get(this);
         photonView.RPC("setDead", PhotonTargets.All, playerID);
-        Debug.LogWarning("ii. PLAYER CALLED KILL PLAYER");
+        Debug.LogWarning("ii. HOST CALLED KILL PLAYER");
     }
 
 }

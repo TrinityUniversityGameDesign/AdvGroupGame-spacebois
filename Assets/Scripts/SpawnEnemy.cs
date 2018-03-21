@@ -39,23 +39,23 @@ public class SpawnEnemy : MonoBehaviour
         if (PhotonNetwork.isMasterClient)
         {
             enemies[numEnemies] = PhotonNetwork.Instantiate(enemy.name, transform.position, Quaternion.identity, 0);  
-            StartCoroutine(waitSpawnIn());
-            playerIDs[numEnemies] = other.ID;
-            foreach (GameObject en in enemies){
-            if(en != null){
-                    en.GetComponent<EnemyAI>().SetPlayers(players,playerIDs);
-                }
-            }
-            numEnemies++;
+            StartCoroutine(waitSpawnIn(other.ID));
         }
 
 
     }
 
   
-    private IEnumerator waitSpawnIn(){
-        yield return new WaitForSecondsRealtime(4);
+    private IEnumerator waitSpawnIn(int pid){
+        yield return new WaitForSecondsRealtime(5);
         players = GameObject.FindGameObjectsWithTag("Player");
+        playerIDs[numEnemies] = pid;
+         foreach (GameObject en in enemies){
+            if(en != null){
+                    en.GetComponent<EnemyAI>().SetPlayers(players,playerIDs);
+                }
+            }
+        numEnemies++;
     }
 
 
