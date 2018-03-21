@@ -12,12 +12,14 @@ public class SpawnEnemy : MonoBehaviour
     public GameObject[] enemies; 
     public GameObject[] players;
     public int[] playerIDs; 
+    public int numPlayers;
    
    
     // Use this for initialization
     void Start()
     {
         numEnemies = 0;
+        numPlayers = 0;
         enemies = new GameObject[maxEnemies];
         playerIDs = new int[maxEnemies];
     }
@@ -28,7 +30,8 @@ public class SpawnEnemy : MonoBehaviour
         {
             enemies[numEnemies] = PhotonNetwork.Instantiate(enemy.name, transform.position, Quaternion.identity, 0);
             players = GameObject.FindGameObjectsWithTag("Player"); 
-            playerIDs[numEnemies] = 1;
+            playerIDs[numPlayers] = 1;
+            numPlayers++;
             enemies[numEnemies].GetComponent<EnemyAI>().SetPlayers(players,playerIDs);
             numEnemies++;
         }
@@ -49,27 +52,37 @@ public class SpawnEnemy : MonoBehaviour
     private IEnumerator waitSpawnIn(int pid){
         yield return new WaitForSecondsRealtime(5);
         players = GameObject.FindGameObjectsWithTag("Player");
-        playerIDs[numEnemies] = pid;
+        playerIDs[numPlayers] = pid;
          foreach (GameObject en in enemies){
             if(en != null){
                     en.GetComponent<EnemyAI>().SetPlayers(players,playerIDs);
                 }
             }
         numEnemies++;
+        numPlayers++;
+    }
+
+    private IEnumerator waitSpawnOut(int pid){
+        yield return new WaitForSecondsRealtime(5);
+        players = GameObject.FindGameObjectsWithTag("Player");
+        playerIDs[System.Array.IndexOf(playerIDs,pid)] = 0;
+        foreach (GameObject en in enemies){
+                if(en != null){
+                    en.GetComponent<EnemyAI>().SetPlayers(players,playerIDs);
+                }
+            }
+        numPlayers--;
     }
 
 
     public void OnPhotonPlayerDisconnected(PhotonPlayer other){
         if (PhotonNetwork.isMasterClient)
         {
-            foreach (GameObject en in enemies){
-                if(en != null){
-                    en.GetComponent<EnemyAI>().UpdateState();
-                }
-            }
+            StartCoroutine(waitSpawnOut(other.ID));
         }
-
     }
+
+
 
 
 }

@@ -47,7 +47,8 @@ public class EnemyAI : MonoBehaviour {
                 case EnemyState.Inactive:
                     //Should maybe consider not having to store the number of players? 
                     if (players.Length > 0) { curState = EnemyState.Search; }
-                   // else {  StartCoroutine(waitSearch());  }
+                    // else {  StartCoroutine(waitSearch());  }
+                    //else { UpdateClosestPlayer(); }
                     break;
                 case EnemyState.Search:
                     FindPlayer();
@@ -88,9 +89,9 @@ public class EnemyAI : MonoBehaviour {
             pl.GetComponent<KillPlayerRemote>().killPlayer(playerKill);
 		  	Debug.LogWarning("II. ENEMY CALLED KILL PLAYER");
             //loc.gameObject; 
+            players = new GameObject[0]; 
             curState = EnemyState.Inactive;
             //Might want to change from array to just have the removal of the dead player?
-            players = new GameObject[0]; 
             /*
              * cmw adding game ending transition
              */
@@ -126,6 +127,29 @@ public class EnemyAI : MonoBehaviour {
         curState = EnemyState.Sniff;
 	}
 
+    public void UpdateClosestPlayer(){
+
+        //GameObject[] players;
+        //keeping call for network test
+        //players = GameObject.FindGameObjectsWithTag("Player");
+        GameObject closest = null;
+        float distance = Mathf.Infinity;
+        Vector3 position = transform.position;
+        foreach (GameObject player in players)
+        {
+            Vector3 diff = player.transform.position - position;
+            float curDistance = diff.sqrMagnitude;
+            if ((curDistance < distance) && curDistance > 1)
+            {
+                closest = player;
+                distance = curDistance;
+            }
+        }
+        play = closest;
+        loc = closest.transform;
+        //Setting the state to follow after; 
+    }
+
     public void SniffPlayer()
     {
         if (startStiff == false)
@@ -155,6 +179,10 @@ public class EnemyAI : MonoBehaviour {
 
                 time = 0;
                 SetRandomTime();
+
+                if(PhotonNetwork.isMasterClient){
+                    UpdateClosestPlayer();
+                }
                 targetX = Random.Range(loc.position.x - radiusLook, loc.position.x + radiusLook);
                 targetY = Random.Range(loc.position.y - radiusLook, loc.position.y + radiusLook);
                 targetZ = Random.Range(loc.position.z - radiusLook, loc.position.z + radiusLook);
@@ -183,7 +211,7 @@ public class EnemyAI : MonoBehaviour {
                 }
 
             }
-            if (Vector3.Distance(transform.position, loc.position) < 5f)
+            if (Vector3.Distance(transform.position, loc.position) < 10f)
             {
                 //Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), 10, 1 << 8) || -- Maybe someday
                 print("Enemy can see the player");
