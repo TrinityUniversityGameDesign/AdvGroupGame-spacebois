@@ -17,10 +17,13 @@ public class KillPlayerRemote : MonoBehaviour
      [PunRPC]
      void setDead(int playerID)
      {
+        Debug.LogWarning("o. RPC setDead");
         if(sPlayer == playerID){
+            Debug.LogWarning("oo. this client setDead");
             this.tag = "Dead";
             //SceneManager.LoadScene("DeadTest");
         }
+        Debug.LogWarning("ooo. RPC setDead Over");
     }
 
     public void killPlayer(int playerID){

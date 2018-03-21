@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class EnemyAI : MonoBehaviour {
 
 	public float speed; 
@@ -11,7 +12,9 @@ public class EnemyAI : MonoBehaviour {
 	EnemyState curState;
  
  	public Transform loc;
+    public GameObject play;
     public GameObject[] players;
+    public int[] playerIDs;
 
 	void Start(){
 		curState = EnemyState.Inactive;
@@ -58,8 +61,8 @@ public class EnemyAI : MonoBehaviour {
 		else{
 			//Setting the state to Inactive, since we have killed our target. 
             Debug.LogWarning("I. ENEMY CALLING KILL PLAYER");
+            int playerKill = playerIDs[System.Array.IndexOf(players,play)];
             GameObject pl = loc.gameObject;
-            int playerKill = pl.GetComponent<KillPlayerRemote>().sPlayer;
             pl.GetComponent<KillPlayerRemote>().killPlayer(playerKill);
 		  	Debug.LogWarning("II. ENEMY CALLED KILL PLAYER");
             //loc.gameObject; 
@@ -94,6 +97,7 @@ public class EnemyAI : MonoBehaviour {
                 distance = curDistance;
             }
         }
+        play = closest;
         loc = closest.transform;
         //Setting the state to follow after; 
         curState = EnemyState.Wander;
@@ -104,7 +108,8 @@ public class EnemyAI : MonoBehaviour {
         curState = EnemyState.Inactive;    
     }
 
-    public void SetPlayers(GameObject[] ps){
+    public void SetPlayers(GameObject[] ps, int[] pids){
         players = ps;
+        playerIDs = pids;
     }
 }
