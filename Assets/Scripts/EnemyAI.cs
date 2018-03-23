@@ -29,11 +29,12 @@ public class EnemyAI : MonoBehaviour {
     public float killRadius;
     public enum EnemyState {Inactive,Search,Wander,Sniff};
 	EnemyState curState;
- 
+    public int playerKill;
  	public Transform loc;
     public GameObject play;
-    public GameObject[] players;
-    public int[] playerIDs;
+    public Tuple<int,GameObject> ptup; 
+    public List<GameObject> players;
+    public List<Tuple<int,GameObject>> playerIDs;
 
 	void Start(){
 		curState = EnemyState.Inactive;
@@ -46,7 +47,7 @@ public class EnemyAI : MonoBehaviour {
             {
                 case EnemyState.Inactive:
                     //Should maybe consider not having to store the number of players? 
-                    if (players.Length > 0) { curState = EnemyState.Search; }
+                    if (players.Count>0) { curState = EnemyState.Search; }
                     // else {  StartCoroutine(waitSearch());  }
                     //else { UpdateClosestPlayer(); }
                     break;
@@ -84,12 +85,13 @@ public class EnemyAI : MonoBehaviour {
 		else{
 			//Setting the state to Inactive, since we have killed our target. 
             Debug.LogWarning("I. ENEMY CALLING KILL PLAYER");
-            int playerKill = playerIDs[System.Array.IndexOf(players,loc.gameObject)];
+            //playerKill = playerIDs[System.Array.IndexOf(players,loc.gameObject)];
             GameObject pl = loc.gameObject;
             pl.GetComponent<KillPlayerRemote>().killPlayer(playerKill);
 		  	Debug.LogWarning("II. ENEMY CALLED KILL PLAYER");
             //loc.gameObject; 
-            players = new GameObject[0]; 
+            players.Remove(pl);
+
             curState = EnemyState.Inactive;
             //Might want to change from array to just have the removal of the dead player?
             /*
@@ -103,25 +105,7 @@ public class EnemyAI : MonoBehaviour {
 	}
 
 	public void FindPlayer(){
-
-		//GameObject[] players;
-        //keeping call for network test
-        //players = GameObject.FindGameObjectsWithTag("Player");
-        GameObject closest = null;
-        float distance = Mathf.Infinity;
-        Vector3 position = transform.position;
-        foreach (GameObject player in players)
-        {
-            Vector3 diff = player.transform.position - position;
-            float curDistance = diff.sqrMagnitude;
-            if ((curDistance < distance) && curDistance > 1)
-            {
-                closest = player;
-                distance = curDistance;
-            }
-        }
-        play = closest;
-        loc = closest.transform;
+        UpdateClosestPlayer();
         //Setting the state to follow after; 
         startStiff = false;
         curState = EnemyState.Sniff;
@@ -147,6 +131,11 @@ public class EnemyAI : MonoBehaviour {
         }
         play = closest;
         loc = closest.transform;
+        foreach(var tup in playerIDs){
+            if(tup.Second == play){
+                playerKill = tup.First;
+            }
+        }
         //Setting the state to follow after; 
     }
 
@@ -222,11 +211,11 @@ public class EnemyAI : MonoBehaviour {
     }
 
     public void UpdateState(){ 
-        players = new GameObject[0]; 
+        players = new List<GameObject>();
         curState = EnemyState.Inactive;    
     }
 
-    public void SetPlayers(GameObject[] ps, int[] pids){
+    public void SetPlayers(List<GameObject> ps, List<Tuple<int,GameObject>> pids){
         players = ps;
         playerIDs = pids;
     }
