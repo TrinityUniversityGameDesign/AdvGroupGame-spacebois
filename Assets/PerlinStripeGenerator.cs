@@ -2,22 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PerlinTextureGenerator : MonoBehaviour {
+public class PerlinStripeGenerator : MonoBehaviour {
     Texture2D texture;
     public int resolution = 128;
     public float steps;
-    public float percentSea;
-    public Color firstCol;
-    public Color secondCol;
-	// Use this for initialization
-	void Start () {
-        firstCol = Random.ColorHSV(0f, 1f, 0f, 1f, 0f, 1f);
-        secondCol = Random.ColorHSV(0f, 1f, 0f, 1f, 0f, 1f);
+    public Color initCol;
+    // Use this for initialization
+    void Start()
+    {
+        initCol = Random.ColorHSV(0f, 1f, 0f, 1f, 0f, 1f);
         steps = Random.Range(2f, 12f);
         texture = new Texture2D(resolution, resolution, TextureFormat.RGB24, true);
         texture.name = "Perlin Texture";
         GetComponent<MeshRenderer>().material.mainTexture = texture;
         genTexture();
+        transform.rotation = Random.rotation;
     }
 
     public void genTexture()
@@ -27,18 +26,15 @@ public class PerlinTextureGenerator : MonoBehaviour {
         {
             for (int x = 0; x < resolution; x++)
             {
-                float val = Mathf.PerlinNoise(x * stepSize * steps, y * stepSize * steps);
-                Color currCol = firstCol;
-                if (val > percentSea)
-                    currCol = secondCol;
-                texture.SetPixel(x, y, currCol);
+                float val = Mathf.PerlinNoise(0, y * stepSize * steps);
+                texture.SetPixel(x, y, (val*2f) * initCol);
             }
         }
         texture.Apply();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 }
