@@ -14,10 +14,14 @@ public class PerlinTextureGenerator : MonoBehaviour {
         firstCol = Random.ColorHSV(0f, 1f, 0f, 1f, 0f, 1f);
         secondCol = Random.ColorHSV(0f, 1f, 0f, 1f, 0f, 1f);
         steps = Random.Range(2f, 12f);
+
         texture = new Texture2D(resolution, resolution, TextureFormat.RGB24, true);
         texture.name = "Perlin Texture";
         GetComponent<MeshRenderer>().material.mainTexture = texture;
+        
         genTexture();
+        GetComponent<MeshRenderer>().material.shader = Shader.Find("Custom/Rim");
+        GetComponent<MeshRenderer>().material.SetColor("_RimColor", secondCol);
     }
 
     public void genTexture()

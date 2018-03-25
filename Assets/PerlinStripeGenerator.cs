@@ -16,6 +16,8 @@ public class PerlinStripeGenerator : MonoBehaviour {
         texture.name = "Perlin Texture";
         GetComponent<MeshRenderer>().material.mainTexture = texture;
         genTexture();
+        GetComponent<MeshRenderer>().material.shader = Shader.Find("Custom/Rim");
+        GetComponent<MeshRenderer>().material.SetColor("_RimColor", initCol);
         transform.rotation = Random.rotation;
     }
 
