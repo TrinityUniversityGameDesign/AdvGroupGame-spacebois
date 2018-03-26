@@ -59,7 +59,8 @@ public class SpawnEnemy : MonoBehaviour
         players = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player")); 
         GameObject pl = players[numPlayers];
         Tuple<int,GameObject> tup = new Tuple<int,GameObject>(1,pl);
-        playerIDs.Add(tup);  
+        playerIDs.Add(tup);
+        setEnemyPlayers();  
         numPlayers++;
     }
 
@@ -72,6 +73,7 @@ public class SpawnEnemy : MonoBehaviour
         }
         playerIDs.Remove(rem);
         players = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player")); 
+        setEnemyPlayers();
         numPlayers--;
     }
 
