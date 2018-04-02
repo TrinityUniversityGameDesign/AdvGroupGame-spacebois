@@ -34,9 +34,9 @@ public class RadarController : MonoBehaviour {
         foreach (GameObject g in GameObject.FindGameObjectsWithTag("Planet"))
         {
             //Debug.Log(Vector3.Distance(transform.position, g.transform.position));
-            if(Vector3.Distance(transform.position, g.transform.position) < distance)
+            if(Vector3.Distance(transform.position, g.transform.position) < distance * 5f)
             {
-                planetSprites[planetCount].transform.position = transform.position + Vector3.Normalize(g.transform.position - transform.position) * (Vector3.Distance(transform.position, g.transform.position)/distance) * 0.1f;
+                planetSprites[planetCount].transform.position = transform.position + Vector3.Normalize(g.transform.position - transform.position) * (Vector3.Distance(transform.position, g.transform.position)/(distance*5f)) * 0.1f;
                 planetSprites[planetCount].GetComponent<MeshRenderer>().enabled = true;
                 planetCount++;
             }
@@ -44,9 +44,9 @@ public class RadarController : MonoBehaviour {
         foreach (GameObject g in GameObject.FindGameObjectsWithTag("Player"))
         {
             //Debug.Log(Vector3.Distance(transform.position, g.transform.position));
-            if (Vector3.Distance(transform.position, g.transform.position) < distance)
+            if (Vector3.Distance(transform.position, g.transform.position) < distance * 5f)
             {
-                playerSprites[playerCount].transform.position = transform.position + Vector3.Normalize(g.transform.position - transform.position) * (Vector3.Distance(transform.position, g.transform.position) / distance) * 0.1f;
+                playerSprites[playerCount].transform.position = transform.position + Vector3.Normalize(g.transform.position - transform.position) * (Vector3.Distance(transform.position, g.transform.position) / (distance * 5f)) * 0.1f;
                 playerSprites[playerCount].GetComponent<MeshRenderer>().enabled = true;
                 playerCount++;
             }
@@ -54,9 +54,9 @@ public class RadarController : MonoBehaviour {
         foreach (GameObject g in GameObject.FindGameObjectsWithTag("Home"))
         {
             //Debug.Log(Vector3.Distance(transform.position, g.transform.position));
-            if (Vector3.Distance(transform.position, g.transform.position) < distance)
+            if (Vector3.Distance(transform.position, g.transform.position) < distance * 5f)
             {
-                planetSprites[planetCount].transform.position = transform.position + Vector3.Normalize(g.transform.position - transform.position) * (Vector3.Distance(transform.position, g.transform.position) / distance) * 0.1f;
+                planetSprites[planetCount].transform.position = transform.position + Vector3.Normalize(g.transform.position - transform.position) * (Vector3.Distance(transform.position, g.transform.position) / (distance * 5f)) * 0.1f;
                 planetSprites[planetCount].GetComponent<MeshRenderer>().enabled = true;
                 planetCount++;
             }
