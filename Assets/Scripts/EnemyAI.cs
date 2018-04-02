@@ -10,6 +10,7 @@ public class EnemyAI : MonoBehaviour {
 	public float speed; 
     public float radiusLook;
     public float rotationSpeed;
+    public float radiusNotice;
     //More stuff for looking around
     private float targetX;
     private float targetY;
@@ -152,7 +153,7 @@ public class EnemyAI : MonoBehaviour {
             }
             if (time > randomTime)
             {
-
+                FindPlayer();
                 time = 0;
                 SetRandomTime();
                 targetX = Random.Range(loc.position.x - radiusLook, loc.position.x + radiusLook);
@@ -183,7 +184,7 @@ public class EnemyAI : MonoBehaviour {
                 }
 
             }
-            if (Vector3.Distance(transform.position, loc.position) < 5f)
+            if (Vector3.Distance(transform.position, loc.position) < radiusNotice || Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), 30, 1 << 8))
             {
                 //Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), 10, 1 << 8) || -- Maybe someday
                 print("Enemy can see the player");
