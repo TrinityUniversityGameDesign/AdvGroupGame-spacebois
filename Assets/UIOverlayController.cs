@@ -55,7 +55,7 @@ public class UIOverlayController : MonoBehaviour {
                 relativePosition = Camera.main.transform.TransformPoint(relativePosition);
 
                 imgs[count].GetComponent<Image>().rectTransform.anchoredPosition = Camera.main.WorldToScreenPoint(relativePosition);
-                texts[count].GetComponent<Text>().rectTransform.anchoredPosition = Camera.main.WorldToScreenPoint(relativePosition) + new Vector3(0,20);
+                texts[count].GetComponent<Text>().rectTransform.anchoredPosition = Camera.main.WorldToScreenPoint(relativePosition) + new Vector3(0,30);
                 texts[count].GetComponent<Text>().text = p.GetComponent<planetInfo>().name;//"" + Vector3.Distance(Camera.main.transform.position, p.transform.position);
                 Vector2 size = new Vector2(30, 30); // * (1f - Vector3.Distance(Camera.main.transform.position, p.transform.position) / 5000f);
                 imgs[count].GetComponent<Image>().rectTransform.sizeDelta = size;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class planetInfo : MonoBehaviour {
     public string name;
     string consonants = "WRTPSDFGHJKLZXCVBNM";
-    string vowels = "AEIOUY";
+    string vowels = "AEIOU";
 	// Use this for initialization
 	void Start () {
 		for(int i = 0; i < Random.Range(3,10); i++)
