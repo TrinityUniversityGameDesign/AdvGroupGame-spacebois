@@ -21,13 +21,9 @@ public class PlayerCollectObject : MonoBehaviour {
         {
             if(hit.transform.tag == "Collect")
             {
-                hit.transform.gameObject.GetComponent<PhotonView>().RequestOwnership();
-                if (hit.transform.gameObject.GetComponent<PhotonView>().isMine)
-                {
-                    PhotonNetwork.Destroy(hit.transform.gameObject);
-                    PhotonNetwork.player.SetScore(PhotonNetwork.player.GetScore() + 1);
-                    
-                }
+                hit.transform.gameObject.GetComponent<diamondControl>().destroySelf();
+                PhotonNetwork.player.SetScore(PhotonNetwork.player.GetScore() + 1);
+
             }
         }
     }

@@ -13,4 +13,11 @@ public class diamondControl : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    [PunRPC]
+    public void destroySelf()
+    {
+        GetComponent<PhotonView>().RPC("destroySelf", PhotonTargets.OthersBuffered);
+        Destroy(gameObject);
+    }
 }
