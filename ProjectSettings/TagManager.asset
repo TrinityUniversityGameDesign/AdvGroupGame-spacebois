@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Home
   - Planet
+  - Collect
   layers:
   - Default
   - TransparentFX

@@ -14,7 +14,7 @@ public class playerCollection : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		gm = GameObject.Find ("diamond");
+        gm = transform.gameObject;//GameObject.Find ("diamond");
 	}
 
 	// Update is called once per frame
