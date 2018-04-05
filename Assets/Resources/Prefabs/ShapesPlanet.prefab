@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114761317921576196}
   - component: {fileID: 114507165188708798}
   - component: {fileID: 114267021902462996}
+  - component: {fileID: 114311817293903392}
   m_Layer: 0
   m_Name: ShapesPlanet
   m_TagString: Planet
@@ -97,6 +98,18 @@ MonoBehaviour:
   resolution: 128
   steps: 0
   initCol: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &114311817293903392
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1323258518738048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 761ef7d622e95f040ae5589d26823756, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: 
 --- !u!114 &114507165188708798
 MonoBehaviour:
   m_ObjectHideFlags: 1
