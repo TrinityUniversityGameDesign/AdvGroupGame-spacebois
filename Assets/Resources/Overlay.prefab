@@ -80,6 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imgs: []
   sprt: {fileID: 21300000, guid: 5801600ef8d81d74aa391dfa03663a3f, type: 3}
+  enem: {fileID: 21300000, guid: 75f86fd3367365549baca47111bfaf33, type: 3}
   texts: []
 --- !u!223 &223468397701460270
 Canvas:

@@ -5,7 +5,6 @@ using UnityEngine;
 public class playerNetworking : MonoBehaviour {
     public GameObject cockpit;
     public GameObject spaceship;
-    public GameObject overlay;
 	// Use this for initialization
 	void Start () {
         if (!GetComponent<PhotonView>().isMine)
