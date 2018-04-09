@@ -25,14 +25,14 @@ public class KillPlayerRemote : MonoBehaviour
         
         if(sPlayer == playerID){
 			hasBeenHit = true;
-            this.tag = "Dead";
+            //this.tag = "Dead";
             
         }
        
     }
 
 	void Update() {
-		if (hasBeenHit) {
+		if (hasBeenHit && GetComponent<PhotonView>().isMine) {
 			StartCoroutine ("Flash");
 			gameObject.transform.position = new Vector3(0,0,0);
 		}
