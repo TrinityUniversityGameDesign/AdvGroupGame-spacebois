@@ -39,9 +39,19 @@ RenderSettings:
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
   m_IndirectSpecularColor: {r: 0.00078163383, g: 0.00079733395, b: 0.00077942724,
     a: 1}
 =======
+  m_IndirectSpecularColor: {r: 0.00077413075, g: 0.0007892502, b: 0.0007713436, a: 1}
+>>>>>>> master
+=======
+=======
+  m_IndirectSpecularColor: {r: 0.00078163383, g: 0.00079733395, b: 0.00077942724,
+    a: 1}
+=======
+>>>>>>> master
   m_IndirectSpecularColor: {r: 0.112766705, g: 0.31465802, b: 0.35520977, a: 1}
 >>>>>>> refs/remotes/origin/master
 --- !u!157 &3
@@ -1074,6 +1084,29 @@ Prefab:
       propertyPath: m_RootOrder
       value: 18
       objectReference: {fileID: 0}
+<<<<<<< HEAD
+=======
+    - target: {fileID: 114775048425371242, guid: a9f400d5e694ebf428b6d55318f9d8a8,
+        type: 2}
+      propertyPath: viewIdField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114775048425371242, guid: a9f400d5e694ebf428b6d55318f9d8a8,
+        type: 2}
+      propertyPath: instantiationId
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114662847252142012, guid: a9f400d5e694ebf428b6d55318f9d8a8,
+        type: 2}
+      propertyPath: viewIdField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114662847252142012, guid: a9f400d5e694ebf428b6d55318f9d8a8,
+        type: 2}
+      propertyPath: instantiationId
+      value: 1
+      objectReference: {fileID: 0}
+>>>>>>> master
     - target: {fileID: 1132744728906992, guid: a9f400d5e694ebf428b6d55318f9d8a8, type: 2}
       propertyPath: m_IsActive
       value: 0
