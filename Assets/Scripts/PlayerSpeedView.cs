@@ -8,9 +8,11 @@ public class PlayerSpeedView : MonoBehaviour
     Font ArialFont;
     Text myText;
     private float speed;
-    private Image energyImage;
+    private float engineCap;
+    //private Image energyImage; // fillAmount not working
     private float energyAmount;
     private bool isFull = false;
+    private float energyAmountMax;
 
     // Use this for initialization
     void Start()
@@ -24,7 +26,9 @@ public class PlayerSpeedView : MonoBehaviour
         myText.fontSize = 40;
         myText.alignment = TextAnchor.MiddleRight;
 
-        energyImage = this.transform.Find("ProgressIndicator").GetComponent<Image>();
+        energyAmountMax = this.transform.parent.parent.parent.GetComponent<PlayerMovement>().speedExhaustScale;
+        //energyImage = this.transform.Find("ProgressIndicator").GetComponent<Image>();
+        //energyImage.fillMethod = Image.FillMethod.Radial360;
 
     }
 
@@ -32,13 +36,17 @@ public class PlayerSpeedView : MonoBehaviour
     void Update()
     {
         speed = this.transform.parent.parent.parent.GetComponent<PlayerMovement>().speed;
+        energyAmount = this.transform.parent.parent.parent.GetComponent<PlayerMovement>().speedExhaust;
+        engineCap = (energyAmount / energyAmountMax) * 100;
+
         myText.rectTransform.localScale = Vector3.one;
         myText.rectTransform.localRotation = Quaternion.identity;
         myText.color = Color.yellow;
-        myText.text = "Speed : " + speed;
-        myText.rectTransform.sizeDelta = new Vector2(500, 50);
+        myText.text = "Speed : " + speed + "\nEngine : " + Mathf.RoundToInt(engineCap) + "%";
+        myText.rectTransform.sizeDelta = new Vector2(500, 200);
 
-        energyImage.fillAmount = .5f;
-        energyImage.color = Color.green;
+        //energyImage.fillAmount = Random.value;
+        //Debug.Log("fill amount: " + energyImage.fillAmount);
+
     }
 }

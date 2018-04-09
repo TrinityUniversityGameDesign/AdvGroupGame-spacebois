@@ -154,7 +154,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1288899057777014
 GameObject:
   m_ObjectHideFlags: 1
@@ -1271,6 +1271,7 @@ MonoBehaviour:
   targetRotation: {x: 0, y: 0, z: 0, w: 0}
   turningRate: 50
   speedExhaust: 0
+  speedExhaustScale: 500
 --- !u!114 &114071540191082108
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1652,8 +1653,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114661481005849320}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
+  viewIdField: 2
+  instantiationId: 2
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114679571641673746
@@ -1721,8 +1722,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114523599870760308}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
+  viewIdField: 1
+  instantiationId: 1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114796011550544300

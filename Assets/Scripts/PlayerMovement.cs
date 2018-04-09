@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour {
     public float turningRate = 1f;
 
     public float speedExhaust; // 100% level is speedExhaustScale
-    private float speedExhaustScale = 500f;
+    public float speedExhaustScale = 5000f;
     private bool exhausted = false;
 
     // Use this for initialization
@@ -30,13 +30,21 @@ public class PlayerMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(isMoving && speedExhaust > 0f){
+        if (speedExhaust <= 0)
+        {
+            exhausted = true;
+            speed = 0f;
+        }
+        else { exhausted = false;  }
+        if(speedExhaust < speedExhaustScale) speedExhaust += 1f;
+        if(isMoving && !exhausted){
             transform.position = transform.position + Camera.main.transform.forward * speed * Time.deltaTime;
-            Debug.Log("Moved with speed of " + speed);
-            speedExhaust -= speed;
+            //Debug.Log("Moved with speed of " + speed);
+            speedExhaust -= speed/10;
             if (GetComponent<PhotonView>().isMine) targetRotation = Camera.main.transform.rotation;
         }
-        if(speedExhaust < 0f) Debug.LogWarning("Exhausted");
+        Debug.LogWarning("Speed Exhaust: " + speedExhaust);
+        //if(speedExhaust < 0f) Debug.LogWarning("Exhausted");
         if (GetComponent<PhotonView>().isMine)
         {
             //cockpit.transform.rotation = Quaternion.Euler(Quaternion.RotateTowards(cockpit.transform.rotation, targetRotation, turningRate * Time.deltaTime) * (cockpit.transform.position - Camera.main.transform.forward) + Camera.main.transform.forward);
@@ -70,10 +78,10 @@ public class PlayerMovement : MonoBehaviour {
             }
         }
 
-        if(speedExhaust < speedExhaustScale){
+        /*if(speedExhaust < speedExhaustScale){
             speedExhaust += 1f;
-        }
+        }*/
 
-        Debug.LogWarning(speedExhaust);
+        //Debug.LogWarning(speedExhaust);
 	}
 }
