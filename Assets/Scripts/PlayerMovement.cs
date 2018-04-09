@@ -14,6 +14,10 @@ public class PlayerMovement : MonoBehaviour {
     public Quaternion targetRotation;
     public float turningRate = 1f;
 
+    public float speedExhaust; // 100% level is speedExhaustScale
+    private float speedExhaustScale = 500f;
+    private bool exhausted = false;
+
     // Use this for initialization
     void Start () {
         if (Application.isEditor)
@@ -21,15 +25,18 @@ public class PlayerMovement : MonoBehaviour {
             keyDetection = true;
         }
         targetRotation = Camera.main.transform.rotation;
-
+        speedExhaust = speedExhaustScale;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if(isMoving){
+        if(isMoving && speedExhaust > 0f){
             transform.position = transform.position + Camera.main.transform.forward * speed * Time.deltaTime;
+            Debug.Log("Moved with speed of " + speed);
+            speedExhaust -= speed;
             if (GetComponent<PhotonView>().isMine) targetRotation = Camera.main.transform.rotation;
         }
+        if(speedExhaust < 0f) Debug.LogWarning("Exhausted");
         if (GetComponent<PhotonView>().isMine)
         {
             //cockpit.transform.rotation = Quaternion.Euler(Quaternion.RotateTowards(cockpit.transform.rotation, targetRotation, turningRate * Time.deltaTime) * (cockpit.transform.position - Camera.main.transform.forward) + Camera.main.transform.forward);
@@ -62,5 +69,11 @@ public class PlayerMovement : MonoBehaviour {
                 }
             }
         }
+
+        if(speedExhaust < speedExhaustScale){
+            speedExhaust += 1f;
+        }
+
+        Debug.LogWarning(speedExhaust);
 	}
 }
