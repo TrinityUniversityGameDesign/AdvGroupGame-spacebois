@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour {
         } else if (z < -zBound){
             transform.position = new Vector3(x, y, zBound - 50);
         } else {
-           Debug.Log("In Bound");
+           //Debug.Log("In Bound");
         }
     }
 	
@@ -84,7 +84,7 @@ public class PlayerMovement : MonoBehaviour {
             Camera.main.gameObject.transform.localPosition = Vector3.zero;
         }
         if (keyDetection){
-            Debug.Log("Key detection active for editor");
+            //Debug.Log("Key detection active for editor");
             if(Input.GetKeyDown(KeyCode.DownArrow)){
                 if (speed > 0) speed -= 1f;
                 else isMoving = false;
