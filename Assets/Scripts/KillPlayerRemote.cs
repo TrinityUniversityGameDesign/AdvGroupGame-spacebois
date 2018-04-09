@@ -2,35 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class KillPlayerRemote : MonoBehaviour
 {
+
+	public GameObject ov;
     
-     public int sPlayer;
+    public int sPlayer;
+	public bool hasBeenHit;
 
      void Awake() {
         sPlayer = PhotonNetwork.player.ID;
+		ov = GameObject.Find ("Overlay");
      }  
 
 
      [PunRPC]
      void setDead(int playerID)
      {
-        Debug.LogWarning("o. RPC setDead");
+        
         if(sPlayer == playerID){
-            Debug.LogWarning("oo. this client setDead");
+			hasBeenHit = true;
             this.tag = "Dead";
-            //SceneManager.LoadScene("DeadTest");
+            
         }
-        Debug.LogWarning("ooo. RPC setDead Over");
+       
     }
 
+	void Update() {
+		if (hasBeenHit) {
+			StartCoroutine ("Flash");
+			gameObject.transform.position = new Vector3(0,0,0);
+		}
+	}
+
     public void killPlayer(int playerID){
-        Debug.LogWarning("i. HOST CALLING KILL PLAYER"+playerID);
+       
         PhotonView photonView = PhotonView.Get(this);
         photonView.RPC("setDead", PhotonTargets.All, playerID);
-        Debug.LogWarning("ii. HOST CALLED KILL PLAYER");
+        
     }
+
+	IEnumerator Flash() {
+		ov.GetComponent<Image> ().enabled = true;
+		yield return new WaitForSeconds (.1f);
+		ov.GetComponent<Image> ().enabled = false;
+		hasBeenHit = false;
+	}
 
 }
