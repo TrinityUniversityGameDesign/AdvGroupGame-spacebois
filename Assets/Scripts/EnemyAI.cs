@@ -37,7 +37,7 @@ public class EnemyAI : MonoBehaviour {
     public List<Tuple<int,GameObject>> playerIDs;
 
 	void Start(){
-		curState = EnemyState.Inactive;
+		curState = EnemyState.Search;
 	} 
 
 	void Update(){
@@ -84,15 +84,15 @@ public class EnemyAI : MonoBehaviour {
 			}
 		else{
 			//Setting the state to Inactive, since we have killed our target. 
-            Debug.LogWarning("I. ENEMY CALLING KILL PLAYER");
+            //Debug.LogWarning("I. ENEMY CALLING KILL PLAYER");
             //playerKill = playerIDs[System.Array.IndexOf(players,loc.gameObject)];
             GameObject pl = loc.gameObject;
             pl.GetComponent<KillPlayerRemote>().killPlayer(playerKill);
-		  	Debug.LogWarning("II. ENEMY CALLED KILL PLAYER");
+		  	//Debug.LogWarning("II. ENEMY CALLED KILL PLAYER");
             //loc.gameObject; 
-            players.Remove(pl);
+            //players.Remove(pl);
 
-            curState = EnemyState.Inactive;
+			curState = EnemyState.Search;
             //Might want to change from array to just have the removal of the dead player?
             /*
              * cmw adding game ending transition
