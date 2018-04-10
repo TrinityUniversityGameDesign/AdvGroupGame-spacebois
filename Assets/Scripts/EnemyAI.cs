@@ -24,18 +24,28 @@ public class EnemyAI : MonoBehaviour {
     private Transform dummyTransform;
     private Quaternion _lookRotation;
 
-    //
-
     public float killRadius;
     public enum EnemyState {Inactive,Search,Wander,Sniff};
 	EnemyState curState;
- 
+    public int playerKill;
  	public Transform loc;
     public GameObject play;
-    public GameObject[] players;
-    public int[] playerIDs;
+    public Tuple<int,GameObject> ptup; 
+    public List<GameObject> players;
+    public List<Tuple<int,GameObject>> playerIDs;
 
-	void Start(){
+    //public string alertColor = "D41E56";
+    //public string idleColor = "41B881FF";
+
+    public Renderer cone;
+    public SpriteRenderer eye;
+    public GameObject idleParticles;
+    public GameObject alertParticles;
+    public Color idleColor = new Color(1f,1f,1f,1f);
+    public Color alertColor = new Color(1f,1f,1f,1f);
+
+
+    void Start(){
 		curState = EnemyState.Inactive;
 	} 
 
@@ -46,17 +56,26 @@ public class EnemyAI : MonoBehaviour {
             {
                 case EnemyState.Inactive:
                     //Should maybe consider not having to store the number of players? 
-                    if (players.Length > 0) { curState = EnemyState.Search; }
-                   // else {  StartCoroutine(waitSearch());  }
+                    if (players.Count>0) { curState = EnemyState.Search; }
+                    // else {  StartCoroutine(waitSearch());  }
+                    //else { UpdateClosestPlayer(); }
                     break;
                 case EnemyState.Search:
                     FindPlayer();
                     break;
                 case EnemyState.Sniff:
                     SniffPlayer();
+                    cone.material.SetColor("_MyColor", idleColor);
+                    eye.color = idleColor;
+                    idleParticles.SetActive(true);
+                    alertParticles.SetActive(false);
                     break;
                 case EnemyState.Wander:
                     GoToLocation();
+                    cone.material.SetColor("_MyColor", alertColor);
+                    eye.color = alertColor;
+                    idleParticles.SetActive(false);
+                    alertParticles.SetActive(true);
                     break;
             }
         }
@@ -83,14 +102,15 @@ public class EnemyAI : MonoBehaviour {
 		else{
 			//Setting the state to Inactive, since we have killed our target. 
             Debug.LogWarning("I. ENEMY CALLING KILL PLAYER");
-            int playerKill = playerIDs[System.Array.IndexOf(players,loc.gameObject)];
+            //playerKill = playerIDs[System.Array.IndexOf(players,loc.gameObject)];
             GameObject pl = loc.gameObject;
             pl.GetComponent<KillPlayerRemote>().killPlayer(playerKill);
 		  	Debug.LogWarning("II. ENEMY CALLED KILL PLAYER");
             //loc.gameObject; 
+            players.Remove(pl);
+
             curState = EnemyState.Inactive;
             //Might want to change from array to just have the removal of the dead player?
-            players = new GameObject[0]; 
             /*
              * cmw adding game ending transition
              */
@@ -102,8 +122,15 @@ public class EnemyAI : MonoBehaviour {
 	}
 
 	public void FindPlayer(){
+        UpdateClosestPlayer();
+        //Setting the state to follow after; 
+        startStiff = false;
+        curState = EnemyState.Sniff;
+	}
 
-		//GameObject[] players;
+    public void UpdateClosestPlayer(){
+
+        //GameObject[] players;
         //keeping call for network test
         //players = GameObject.FindGameObjectsWithTag("Player");
         GameObject closest = null;
@@ -121,10 +148,13 @@ public class EnemyAI : MonoBehaviour {
         }
         play = closest;
         loc = closest.transform;
+        foreach(var tup in playerIDs){
+            if(tup.Second == play){
+                playerKill = tup.First;
+            }
+        }
         //Setting the state to follow after; 
-        startStiff = false;
-        curState = EnemyState.Sniff;
-	}
+    }
 
     public void SniffPlayer()
     {
@@ -155,6 +185,10 @@ public class EnemyAI : MonoBehaviour {
 
                 time = 0;
                 SetRandomTime();
+
+                if(PhotonNetwork.isMasterClient){
+                    UpdateClosestPlayer();
+                }
                 targetX = Random.Range(loc.position.x - radiusLook, loc.position.x + radiusLook);
                 targetY = Random.Range(loc.position.y - radiusLook, loc.position.y + radiusLook);
                 targetZ = Random.Range(loc.position.z - radiusLook, loc.position.z + radiusLook);
@@ -183,7 +217,7 @@ public class EnemyAI : MonoBehaviour {
                 }
 
             }
-            if (Vector3.Distance(transform.position, loc.position) < 5f)
+            if (Vector3.Distance(transform.position, loc.position) < 10f)
             {
                 //Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), 10, 1 << 8) || -- Maybe someday
                 print("Enemy can see the player");
@@ -194,11 +228,11 @@ public class EnemyAI : MonoBehaviour {
     }
 
     public void UpdateState(){ 
-        players = new GameObject[0]; 
+        players = new List<GameObject>();
         curState = EnemyState.Inactive;    
     }
 
-    public void SetPlayers(GameObject[] ps, int[] pids){
+    public void SetPlayers(List<GameObject> ps, List<Tuple<int,GameObject>> pids){
         players = ps;
         playerIDs = pids;
     }
