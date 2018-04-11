@@ -58,7 +58,7 @@ public class SpawnEnemy : MonoBehaviour
         yield return new WaitForSecondsRealtime(5);
         players = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player")); 
         GameObject pl = players[numPlayers];
-        Tuple<int,GameObject> tup = new Tuple<int,GameObject>(1,pl);
+		Tuple<int,GameObject> tup = new Tuple<int,GameObject>(players.Count,pl);
         playerIDs.Add(tup);
         setEnemyPlayers();  
         numPlayers++;
