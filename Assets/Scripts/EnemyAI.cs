@@ -36,9 +36,21 @@ public class EnemyAI : MonoBehaviour {
     public List<GameObject> players;
     public List<Tuple<int,GameObject>> playerIDs;
 
-	void Start(){
+    // colors!
+    //public string alertColor = "D41E56";
+    //public string idleColor = "41B881FF";
+    public Renderer cone;
+    public SpriteRenderer eye;
+    public GameObject idleParticles;
+    public GameObject alertParticles;
+    public Color idleColor = new Color(1f, 1f, 1f, 1f); // 41B881FF
+    public Color alertColor = new Color(1f, 1f, 1f, 1f); // D41E56
+
+    void Start(){
 		curState = EnemyState.Inactive;
-	} 
+        Renderer rend = GetComponent<Renderer>();
+        rend.material.shader = Shader.Find("Custom/FakeVolumetricLightShader");
+    } 
 
 	void Update(){
         if (GetComponent<PhotonView>().isMine)
@@ -56,9 +68,17 @@ public class EnemyAI : MonoBehaviour {
                     break;
                 case EnemyState.Sniff:
                     SniffPlayer();
+                    cone.material.SetColor("_MyColor", idleColor);
+                    eye.color = idleColor;
+                    idleParticles.SetActive(true);
+                    alertParticles.SetActive(false);
                     break;
                 case EnemyState.Wander:
                     GoToLocation();
+                    cone.material.SetColor("_MyColor", alertColor);
+                    eye.color = alertColor;
+                    idleParticles.SetActive(false);
+                    alertParticles.SetActive(true);
                     break;
             }
         }
