@@ -35,6 +35,7 @@ public class KillPlayerRemote : MonoBehaviour
 		if (hasBeenHit && GetComponent<PhotonView>().isMine) {
 			StartCoroutine ("Flash");
 			gameObject.transform.position = new Vector3(0,0,0);
+			gameObject.GetComponent<PlayerMovement> ().speed = 0;
 		}
 	}
 
