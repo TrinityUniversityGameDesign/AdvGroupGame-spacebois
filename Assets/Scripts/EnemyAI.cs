@@ -184,7 +184,7 @@ public class EnemyAI : MonoBehaviour {
                 }
 
             }
-            if (Vector3.Distance(transform.position, loc.position) < radiusNotice || Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), 30, 1 << 8))
+            if (Vector3.Distance(transform.position, loc.position) < radiusNotice || IsPlayerInVisionCone())
             {
                 //Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), 10, 1 << 8) || -- Maybe someday
                 print("Enemy can see the player");
@@ -215,6 +215,18 @@ public class EnemyAI : MonoBehaviour {
         Quaternion diff = Quaternion.Inverse(a) * b;
         float sum = Mathf.Abs(diff.x) + Mathf.Abs(diff.y) + Mathf.Abs(diff.z);
         return sum;
+    }
+
+    bool IsPlayerInVisionCone() {
+        float angle;
+        Vector3 enemyForward = transform.TransformDirection(Vector3.forward);
+        Vector3 playerDirection = (loc.position - transform.position).normalized;
+        angle = Vector3.Angle(enemyForward, playerDirection);
+        print("Angle is "+angle);
+        if (angle > 20 || Vector3.Distance(loc.position, transform.position) > 70)
+            return false;
+        else
+            return true;
     }
 
 
