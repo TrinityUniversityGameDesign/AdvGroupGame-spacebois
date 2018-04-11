@@ -5,40 +5,48 @@ using UnityEngine;
 public class SpawnEnemy : MonoBehaviour
 {
     public int numEnemies;
-    //CONSTANT MAXENEMIES
-    // MAYBE CHANGE FROM ARRAYS TO KEEP FROM THIS?
-    public int maxEnemies = 10; 
     public GameObject enemy;
-    public GameObject[] enemies; 
-    public GameObject[] players;
-    public int[] playerIDs; 
-   
-   
+    public List<GameObject> enemies; 
+    public List<GameObject> players;
+    public List<Tuple<int,GameObject>> playerIDs; 
+    public int numPlayers;
+    public Tuple<int,GameObject> rem;
+    
     // Use this for initialization
     void Start()
     {
-        numEnemies = 0;
-        enemies = new GameObject[maxEnemies];
-        playerIDs = new int[maxEnemies];
+        enemies = new List<GameObject>();
+        playerIDs = new List<Tuple<int,GameObject>>();
+        numPlayers = 0;
     }
 
     public void OnJoinedRoom()
     {
        if (PhotonNetwork.isMasterClient)
         {
-            enemies[numEnemies] = PhotonNetwork.Instantiate(enemy.name, transform.position, Quaternion.identity, 0);
-            players = GameObject.FindGameObjectsWithTag("Player"); 
-            playerIDs[numEnemies] = 1;
-            enemies[numEnemies].GetComponent<EnemyAI>().SetPlayers(players,playerIDs);
-            numEnemies++;
-        }
+            enemies.Add(PhotonNetwork.Instantiate(enemy.name, transform.position, Quaternion.identity, 0));
+            players = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player")); 
+            GameObject pl = players[numPlayers];
+            Tuple<int,GameObject> tup = new Tuple<int,GameObject>(1,pl);
+            playerIDs.Add(tup);  
+            numPlayers++;
+            setEnemyPlayers();
+        
+        }   
         
     }
+
+    public void setEnemyPlayers(){
+        foreach ( GameObject en in enemies){
+            en.GetComponent<EnemyAI>().SetPlayers(players,playerIDs);
+        }
+    }
+
     public void OnPhotonPlayerConnected(PhotonPlayer other){
         //Might need to just store all the new players
         if (PhotonNetwork.isMasterClient)
         {
-            enemies[numEnemies] = PhotonNetwork.Instantiate(enemy.name, transform.position, Quaternion.identity, 0);  
+            enemies.Add(PhotonNetwork.Instantiate(enemy.name, transform.position, Quaternion.identity, 0));  
             StartCoroutine(waitSpawnIn(other.ID));
         }
 
@@ -48,28 +56,36 @@ public class SpawnEnemy : MonoBehaviour
   
     private IEnumerator waitSpawnIn(int pid){
         yield return new WaitForSecondsRealtime(5);
-        players = GameObject.FindGameObjectsWithTag("Player");
-        playerIDs[numEnemies] = pid;
-         foreach (GameObject en in enemies){
-            if(en != null){
-                    en.GetComponent<EnemyAI>().SetPlayers(players,playerIDs);
-                }
+        players = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player")); 
+        GameObject pl = players[numPlayers];
+        Tuple<int,GameObject> tup = new Tuple<int,GameObject>(1,pl);
+        playerIDs.Add(tup);
+        setEnemyPlayers();  
+        numPlayers++;
+    }
+
+    private IEnumerator waitSpawnOut(int pid){
+        yield return new WaitForSecondsRealtime(5);
+        foreach(var tup in playerIDs){
+            if(tup.First == pid){
+                rem = tup;
             }
-        numEnemies++;
+        }
+        playerIDs.Remove(rem);
+        players = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player")); 
+        setEnemyPlayers();
+        numPlayers--;
     }
 
 
     public void OnPhotonPlayerDisconnected(PhotonPlayer other){
         if (PhotonNetwork.isMasterClient)
         {
-            foreach (GameObject en in enemies){
-                if(en != null){
-                    en.GetComponent<EnemyAI>().UpdateState();
-                }
-            }
+            StartCoroutine(waitSpawnOut(other.ID));
         }
-
     }
+
+
 
 
 }

@@ -37,4 +37,5 @@ MonoBehaviour:
   - RequestForPickupItems
   - RequestForPickupTimes
   - setDead
+  - destroySelf
   DisableAutoOpenWizard: 1
