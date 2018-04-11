@@ -14,7 +14,7 @@ public class ScoreList : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         int count = 0;
-        while(texts.Count < PhotonNetwork.playerList.Length)
+        while(texts.Count < 8)
         {
             GameObject t = new GameObject("txt");
             t.transform.SetParent(transform);
