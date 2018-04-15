@@ -25,7 +25,7 @@ public class EnemyAI : MonoBehaviour {
     private Quaternion _lookRotation;
 
     public float killRadius;
-    public enum EnemyState {Inactive,Search,Wander,Sniff};
+    public enum EnemyState {Inactive,Search,Wander,Sniff,LowAlert};
 	EnemyState curState;
     public int playerKill;
  	public Transform loc;
@@ -64,6 +64,9 @@ public class EnemyAI : MonoBehaviour {
                 case EnemyState.Search:
                     FindPlayer();
                     break;
+                case EnemyState.LowAlert:
+                    Patrol();
+                    break;
                 case EnemyState.Sniff: // looking for players
                     SniffPlayer();
                     cone.material.SetColor("_MyColor", idleColor);
@@ -99,6 +102,10 @@ public class EnemyAI : MonoBehaviour {
         players = GameObject.FindGameObjectsWithTag("Player");
     }
     */
+
+    public void Patrol() {
+    
+    }
 
 	//Maybe have this take in the argument Transform loc?
 	public void GoToLocation(){
@@ -250,7 +257,7 @@ public class EnemyAI : MonoBehaviour {
                 }
 
             }
-            if (Vector3.Distance(transform.position, loc.position) < 25f)
+            if (Vector3.Distance(transform.position, loc.position) < 25f || IsPlayerInVisionCone())
             {
                 //Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), 10, 1 << 8) || -- Maybe someday
                 print("Enemy can see the player");
@@ -281,6 +288,19 @@ public class EnemyAI : MonoBehaviour {
         Quaternion diff = Quaternion.Inverse(a) * b;
         float sum = Mathf.Abs(diff.x) + Mathf.Abs(diff.y) + Mathf.Abs(diff.z);
         return sum;
+    }
+
+    bool IsPlayerInVisionCone()
+    {
+        float angle;
+        Vector3 enemyForward = transform.TransformDirection(Vector3.forward);
+        Vector3 playerDirection = (loc.position - transform.position).normalized;
+        angle = Vector3.Angle(enemyForward, playerDirection);
+        print("Angle is " + angle);
+        if (angle > 20 || Vector3.Distance(loc.position, transform.position) > 70)
+            return false;
+        else
+            return true;
     }
 
 
