@@ -58,8 +58,8 @@ public class UIOverlayController : MonoBehaviour {
                 imgs[count].GetComponent<Image>().sprite = sprt;
                 texts[count].GetComponent<Text>().color = Color.green;
 
-                imgs[count].GetComponent<Image>().rectTransform.anchoredPosition = Camera.main.WorldToScreenPoint(relativePosition);
-                texts[count].GetComponent<Text>().rectTransform.anchoredPosition = Camera.main.WorldToScreenPoint(relativePosition) + new Vector3(0,30);
+                imgs[count].GetComponent<Image>().rectTransform.anchoredPosition = (Vector2)Camera.main.WorldToViewportPoint(relativePosition) - GetComponent<RectTransform>().sizeDelta / 2f;
+                texts[count].GetComponent<Text>().rectTransform.anchoredPosition = (Vector2)Camera.main.WorldToViewportPoint(relativePosition) - GetComponent<RectTransform>().sizeDelta / 2f + new Vector2(0,30);
                 texts[count].GetComponent<Text>().text = "" + (int)Vector3.Distance(Camera.main.transform.position, p.transform.position);//p.GetComponent<planetInfo>().name;//
                 Vector2 size = new Vector2(30, 30); // * (1f - Vector3.Distance(Camera.main.transform.position, p.transform.position) / 5000f);
                 imgs[count].GetComponent<Image>().rectTransform.sizeDelta = size;
@@ -77,8 +77,8 @@ public class UIOverlayController : MonoBehaviour {
                 imgs[count].GetComponent<Image>().sprite = enem;
                 texts[count].GetComponent<Text>().color = Color.red;
 
-                imgs[count].GetComponent<Image>().rectTransform.anchoredPosition = Camera.main.WorldToScreenPoint(relativePosition);
-                texts[count].GetComponent<Text>().rectTransform.anchoredPosition = Camera.main.WorldToScreenPoint(relativePosition) + new Vector3(0, 30);
+                imgs[count].GetComponent<Image>().rectTransform.anchoredPosition = (Vector2)Camera.main.WorldToViewportPoint(relativePosition) - GetComponent<RectTransform>().sizeDelta / 2f;
+                texts[count].GetComponent<Text>().rectTransform.anchoredPosition = (Vector2)Camera.main.WorldToViewportPoint(relativePosition) - GetComponent<RectTransform>().sizeDelta / 2f + new Vector2(0, 30);
                 texts[count].GetComponent<Text>().text = "" + (int)Vector3.Distance(Camera.main.transform.position, p.transform.position);//p.GetComponent<planetInfo>().name;//
                 Vector2 size = new Vector2(30, 30); // * (1f - Vector3.Distance(Camera.main.transform.position, p.transform.position) / 5000f);
                 imgs[count].GetComponent<Image>().rectTransform.sizeDelta = size;
