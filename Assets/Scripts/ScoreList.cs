@@ -14,7 +14,7 @@ public class ScoreList : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         int count = 0;
-        while(texts.Count < PhotonNetwork.playerList.Length)
+        while(texts.Count < 8)
         {
             GameObject t = new GameObject("txt");
             t.transform.SetParent(transform);
@@ -23,7 +23,7 @@ public class ScoreList : MonoBehaviour {
             myText.fontSize = 40;
             myText.rectTransform.localScale = Vector3.one;
             myText.rectTransform.localRotation = Quaternion.identity;
-            myText.rectTransform.anchoredPosition3D = Vector3.up * 250 - Vector3.up * 50 * texts.Count;
+            myText.rectTransform.anchoredPosition3D = Vector3.up * 200 - Vector3.up * 50 * texts.Count + Vector3.right * 20;
             myText.rectTransform.sizeDelta = new Vector2(500, 50);
             texts.Add(t);
         }
@@ -32,16 +32,17 @@ public class ScoreList : MonoBehaviour {
             texts[count].GetComponent<Text>().text = "Player " + p.ID + ": " + p.GetScore(); 
             if(p.ID == PhotonNetwork.player.ID)
             {
-                texts[count].GetComponent<Text>().color = Color.magenta;
+                texts[count].GetComponent<Text>().color = Color.green;
             } else
             {
                 texts[count].GetComponent<Text>().color = Color.white;
             }
             count += 1;
         }
-        for(int i = count; count < PhotonNetwork.playerList.Length; i++)
+        for(int i = count; count < texts.Count; i++)
         {
             texts[i].GetComponent<Text>().text = "";
         }
+        
 	}
 }

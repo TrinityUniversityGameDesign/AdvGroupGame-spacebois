@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerCollectObject : MonoBehaviour {
     public float raycastDist = 5f;
+    public int collectGoal = 5;
     // Use this for initialization
     void Start()
     {
@@ -17,14 +18,23 @@ public class PlayerCollectObject : MonoBehaviour {
 	void Update () {
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, Camera.main.transform.forward, out hit, raycastDist))
+        if (GetComponent<PhotonView>().isMine)
         {
-            if(hit.transform.tag == "Collect")
+            if(PhotonNetwork.player.GetScore() >= collectGoal)
             {
-                hit.transform.gameObject.GetComponent<diamondControl>().destroySelf();
-                PhotonNetwork.player.SetScore(PhotonNetwork.player.GetScore() + 1);
+                Debug.Log("Goal Hit");
+            }
+            if (Physics.Raycast(transform.position, Camera.main.transform.forward, out hit, raycastDist))
+            {
+                if (hit.transform.tag == "Collect")
+                {
+                    hit.transform.gameObject.GetComponent<diamondControl>().destroySelf();
+                    PhotonNetwork.player.SetScore(PhotonNetwork.player.GetScore() + 1);
 
+                }
             }
         }
+
+        
     }
 }
