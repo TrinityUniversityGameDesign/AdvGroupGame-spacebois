@@ -69,6 +69,10 @@ public class EnemyAI : MonoBehaviour {
                     break;
                 case EnemyState.LowAlert:
                     Patrol();
+                    cone.material.SetColor("_MyColor", idleColor);
+                    eye.color = idleColor;
+                    idleParticles.SetActive(true);
+                    alertParticles.SetActive(false);
                     break;
                 case EnemyState.Sniff: // looking for players
                     SniffPlayer();
@@ -153,12 +157,7 @@ public class EnemyAI : MonoBehaviour {
                 }
 
             }
-            if (IsPlayerInVisionCone())
-            {
-                print("Enemy can see the player");
-                curState = EnemyState.Wander;
-            }
-            if (Vector3.Distance(transform.position, loc.position) < 50f)
+            if (Vector3.Distance(transform.position, loc.position) < 100f)
             {
                 print("Enemy is looking for a player");
                 startSniff = false;
@@ -166,7 +165,7 @@ public class EnemyAI : MonoBehaviour {
             }
         }
         else {
-            patrolPoint = Random.insideUnitSphere * 300f;
+            patrolPoint = Random.insideUnitSphere * Random.Range(100f, 900f);
             time = 0;
             SetRandomTime();
             targetX = Random.Range(patrolPoint.x - radiusLook, patrolPoint.x + radiusLook);
