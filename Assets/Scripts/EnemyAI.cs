@@ -16,11 +16,14 @@ public class EnemyAI : MonoBehaviour {
     private float targetZ;
     private float time;
     private float randomTime;
-    private bool startStiff;
+    private bool startSniff;
+    private bool hasPatrol; 
+    private bool guardCrystal;
     private Vector3 targetTransform;
     private Vector3 lookTransform;
     private Vector3 dummyRotate;
     private Vector3 _direction;
+    private Vector3 patrolPoint;
     private Transform dummyTransform;
     private Quaternion _lookRotation;
 
@@ -104,7 +107,76 @@ public class EnemyAI : MonoBehaviour {
     */
 
     public void Patrol() {
-    
+        if (hasPatrol || guardCrystal)
+        {
+            float step = speed * Time.deltaTime;
+
+            if (Vector3.Distance(transform.position, targetTransform) < 2.5)
+            {
+                time += Time.deltaTime;
+            }
+            if (time > randomTime)
+            {
+
+                time = 0;
+                SetRandomTime();
+
+                if (PhotonNetwork.isMasterClient)
+                {
+                    UpdateClosestPlayer();
+                }
+                targetX = Random.Range(patrolPoint.x - radiusLook, patrolPoint.x + radiusLook);
+                targetY = Random.Range(patrolPoint.y - radiusLook, patrolPoint.y + radiusLook);
+                targetZ = Random.Range(patrolPoint.z - radiusLook, patrolPoint.z + radiusLook);
+                targetTransform = new Vector3(targetX, targetY, targetZ);
+
+                _direction = (targetTransform - transform.position).normalized;
+                _lookRotation = Quaternion.LookRotation(_direction);
+
+                //transform.LookAt(targetTransform);
+            }
+            else
+            {
+                transform.position = Vector3.MoveTowards(transform.position, targetTransform, step);
+                //print(Quaternion.Inverse(_lookRotation) * transform.rotation);
+                if (differenceOfRotation(_lookRotation, transform.rotation) > 0.1)
+                    transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * rotationSpeed);
+                else
+                {
+
+                    targetX = Random.Range(targetX - 0.75f, targetX + 0.75f);
+                    targetY = Random.Range(targetY - 0.75f, targetY + 0.75f);
+                    targetZ = Random.Range(targetZ - 0.75f, targetZ + 0.75f);
+                    lookTransform = new Vector3(targetX, targetY, targetZ);
+                    _direction = (lookTransform - transform.position).normalized;
+                    _lookRotation = Quaternion.LookRotation(_direction);
+                }
+
+            }
+            if (IsPlayerInVisionCone())
+            {
+                print("Enemy can see the player");
+                curState = EnemyState.Wander;
+            }
+            if (Vector3.Distance(transform.position, loc.position) < 50f)
+            {
+                print("Enemy is looking for a player");
+                startSniff = false;
+                curState = EnemyState.Sniff;
+            }
+        }
+        else {
+            patrolPoint = Random.insideUnitSphere * 300f;
+            time = 0;
+            SetRandomTime();
+            targetX = Random.Range(patrolPoint.x - radiusLook, patrolPoint.x + radiusLook);
+            targetY = Random.Range(patrolPoint.y - radiusLook, patrolPoint.y + radiusLook);
+            targetZ = Random.Range(patrolPoint.z - radiusLook, patrolPoint.z + radiusLook);
+            targetTransform = new Vector3(targetX, targetY, targetZ);
+            _direction = (targetTransform - transform.position).normalized;
+            _lookRotation = Quaternion.LookRotation(_direction);
+            hasPatrol = true;
+        }
     }
 
 	//Maybe have this take in the argument Transform loc?
@@ -152,8 +224,8 @@ public class EnemyAI : MonoBehaviour {
         //Setting the state to follow after;
         if(loc != null)
         {
-            startStiff = false;
-            curState = EnemyState.Sniff;
+            hasPatrol = false;
+            curState = EnemyState.LowAlert;
 
         }
         else
@@ -198,7 +270,7 @@ public class EnemyAI : MonoBehaviour {
 
     public void SniffPlayer()
     {
-        if (startStiff == false)
+        if (startSniff == false)
         {
             time = 0;
             SetRandomTime();
@@ -209,7 +281,7 @@ public class EnemyAI : MonoBehaviour {
 
             _direction = (targetTransform - transform.position).normalized;
             _lookRotation = Quaternion.LookRotation(_direction);
-            startStiff = true;
+            startSniff = true;
         }
         else
         {
