@@ -24,7 +24,10 @@ public class SpawnEnemy : MonoBehaviour
     {
        if (PhotonNetwork.isMasterClient)
         {
-            enemies.Add(PhotonNetwork.Instantiate(enemy.name, transform.position, Quaternion.identity, 0));
+            for (int i =0; i<5; i++)
+            {
+                enemies.Add(PhotonNetwork.Instantiate(enemy.name, transform.position + Random.insideUnitSphere * 300f, Quaternion.identity, 0));
+            }
             players = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player")); 
             GameObject pl = players[numPlayers];
             Tuple<int,GameObject> tup = new Tuple<int,GameObject>(1,pl);
@@ -46,11 +49,12 @@ public class SpawnEnemy : MonoBehaviour
         //Might need to just store all the new players
         if (PhotonNetwork.isMasterClient)
         {
-            enemies.Add(PhotonNetwork.Instantiate(enemy.name, transform.position, Quaternion.identity, 0));  
+            for (int i = 0; i < 5; i++)
+            {
+                enemies.Add(PhotonNetwork.Instantiate(enemy.name, transform.position + Random.insideUnitSphere * 300f, Quaternion.identity, 0));
+            }
             StartCoroutine(waitSpawnIn(other.ID));
         }
-
-
     }
 
   
