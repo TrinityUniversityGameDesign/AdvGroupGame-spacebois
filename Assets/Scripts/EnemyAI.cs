@@ -44,6 +44,7 @@ public class EnemyAI : MonoBehaviour {
     public GameObject alertParticles;
     public Color idleColor = new Color(1f, 1f, 1f, 1f); // 41B881FF
     public Color alertColor = new Color(1f, 1f, 1f, 1f); // D41E56
+    public float originDistance;
 
     void Start(){
         loc = null;
@@ -55,11 +56,15 @@ public class EnemyAI : MonoBehaviour {
 	void Update(){
         if (GetComponent<PhotonView>().isMine)
         {
+            float enemoriginDistance = Vector3.Distance(transform.position, Vector3.zero);
+            if(enemoriginDistance < 25){
+                transform.position =  new Vector3(transform.position.x+Random.Range(15f,20f), transform.position.y+Random.Range(15f,20f),transform.position.z+Random.Range(15f,20f));
+            }
+
             switch (curState)
             {
                 case EnemyState.Inactive:
                     //Should maybe consider not having to store the number of players? 
-                    Debug.Log(players.Count);
                     if (players.Count>0) { curState = EnemyState.Search; }
                     // else {  StartCoroutine(waitSearch());  }
                     //else { UpdateClosestPlayer(); }
@@ -75,6 +80,13 @@ public class EnemyAI : MonoBehaviour {
                     alertParticles.SetActive(false);
                     break;
                 case EnemyState.Sniff: // looking for players
+                    originDistance = Vector3.Distance(loc.position, Vector3.zero);
+                    if (originDistance < 12.5) // if theyre in the safe zone....
+                    {
+                        //dont get em
+                        curState = EnemyState.Search;
+                        break;
+                    }
                     SniffPlayer();
                     cone.material.SetColor("_MyColor", idleColor);
                     eye.color = idleColor;
@@ -82,11 +94,12 @@ public class EnemyAI : MonoBehaviour {
                     alertParticles.SetActive(false);
                     break;
                 case EnemyState.Wander: // chasing a player
-                    float originDistance = Vector3.Distance(loc.position, Vector3.zero);
+                    originDistance = Vector3.Distance(loc.position, Vector3.zero);
                     if (originDistance < 12.5) // if theyre in the safe zone....
                     {
                         //dont get em
                         curState = EnemyState.Search;
+                        break;
                     }
                     else
                     {
@@ -159,7 +172,6 @@ public class EnemyAI : MonoBehaviour {
             }
             if (Vector3.Distance(transform.position, loc.position) < 100f)
             {
-                print("Enemy is looking for a player");
                 startSniff = false;
                 curState = EnemyState.Sniff;
             }
@@ -185,6 +197,12 @@ public class EnemyAI : MonoBehaviour {
             {
                 curState = EnemyState.Search;
             }
+            originDistance = Vector3.Distance(loc.position, Vector3.zero);
+            if (originDistance < 12.5) // if theyre in the safe zone....
+                    {
+                        //dont get em
+                        curState = EnemyState.Search;
+                    } 
             else
             {
                 //Should this happen every call? 
@@ -225,7 +243,6 @@ public class EnemyAI : MonoBehaviour {
         {
             hasPatrol = false;
             curState = EnemyState.LowAlert;
-
         }
         else
         {
