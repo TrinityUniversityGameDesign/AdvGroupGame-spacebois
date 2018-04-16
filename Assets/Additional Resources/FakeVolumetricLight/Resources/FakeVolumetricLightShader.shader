@@ -7,6 +7,7 @@
      _Intensity("Intensity", Range(0., 1.5)) = .2
      _Fade("Fade", Range(0., 10.)) = 1.
      _Wind("Wind", Range(0., 1.)) = .1
+	 _MyColor("Some Color", Color) = (1,1,1,1)
  }
  
  SubShader {
@@ -46,6 +47,7 @@
              float _Intensity;
              float _Fade;
              float _Wind;
+			 float4 _MyColor;
              
              v2f vert (appdata_t v){
 				v2f o;
@@ -95,7 +97,8 @@
 				 float fade = saturate(pow(1. - i.uv.y, _Fade));
 
 			     col.a *= fresnel * _AlphaOffset * fade;
-				 col.rgb *= float3(1,0.1,0.2);
+				 //col.rgb *= float3(1,0.1,0.2);
+				 col.rgb *= float3(_MyColor.rgb);
 
                  return col;
              }
