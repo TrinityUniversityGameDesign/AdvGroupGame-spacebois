@@ -170,14 +170,16 @@ public class EnemyAI : MonoBehaviour {
                 }
 
             }
-            if (Vector3.Distance(transform.position, loc.position) < 100f)
+            if (Vector3.Distance(transform.position, loc.position) < 175f)
             {
                 startSniff = false;
                 curState = EnemyState.Sniff;
             }
+
+
         }
         else {
-            patrolPoint = Random.insideUnitSphere * Random.Range(100f, 900f);
+            patrolPoint = Random.insideUnitSphere * Random.Range(200f, 900f);
             time = 0;
             SetRandomTime();
             targetX = Random.Range(patrolPoint.x - radiusLook, patrolPoint.x + radiusLook);
@@ -347,9 +349,14 @@ public class EnemyAI : MonoBehaviour {
             }
             if (Vector3.Distance(transform.position, loc.position) < 25f || IsPlayerInVisionCone())
             {
-                //Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), 10, 1 << 8) || -- Maybe someday
                 print("Enemy can see the player");
                 curState = EnemyState.Wander;
+
+            }
+            if (Vector3.Distance(transform.position, loc.position) > 200f || IsPlayerInVisionCone())
+            {
+                print("Enemy has lost the player's trail");
+                curState = EnemyState.Search;
 
             }
         }
@@ -391,6 +398,9 @@ public class EnemyAI : MonoBehaviour {
             return true;
     }
 
+    public void SearchInLocation() {
+
+    }
 
 }
 
