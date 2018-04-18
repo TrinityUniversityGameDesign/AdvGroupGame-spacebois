@@ -9,6 +9,7 @@ public class UIOverlayController : MonoBehaviour {
     public Sprite enem;
     public List<GameObject> texts = new List<GameObject>();
     Font ArialFont;
+    public float dist = 5f;
     // Use this for initialization
     void Start()
     {
@@ -19,7 +20,7 @@ public class UIOverlayController : MonoBehaviour {
 	void Update () {
         while (imgs.Count < GameObject.FindGameObjectsWithTag("Collect").Length + GameObject.FindGameObjectsWithTag("Enemy").Length)
         {
-            GameObject t = new GameObject("img");
+            /*GameObject t = new GameObject("img");
             t.transform.SetParent(transform);
             Image myImg = t.AddComponent<Image>();
             myImg.rectTransform.localScale = Vector3.one;
@@ -29,9 +30,12 @@ public class UIOverlayController : MonoBehaviour {
             myImg.sprite = sprt;
             myImg.rectTransform.anchorMax = Vector2.zero;
             myImg.rectTransform.anchorMin = Vector2.zero;
-            imgs.Add(t);
+            imgs.Add(t);*/
+            GameObject sp = new GameObject("img");
+            sp.AddComponent<SpriteRenderer>();
+            imgs.Add(sp);
 
-            t = new GameObject("txt");
+            GameObject t = new GameObject("txt");
             t.transform.SetParent(transform);
             Text myText = t.AddComponent<Text>();
             myText.font = ArialFont;
@@ -55,14 +59,21 @@ public class UIOverlayController : MonoBehaviour {
                 relativePosition = new Vector3(relativePosition.x, relativePosition.y, Mathf.Max(relativePosition.z, 1.0f));
                 relativePosition = Camera.main.transform.TransformPoint(relativePosition);
 
-                imgs[count].GetComponent<Image>().sprite = sprt;
+                //imgs[count].GetComponent<Image>().sprite = sprt;
                 texts[count].GetComponent<Text>().color = Color.green;
 
+                Vector3 diff = p.transform.position - Camera.main.transform.position;
+                diff = diff.normalized;
+                imgs[count].transform.position = Camera.main.transform.position + diff * dist;
+                imgs[count].transform.LookAt(Camera.main.transform.position, -Vector3.up);
+                imgs[count].GetComponent<SpriteRenderer>().sprite = sprt;
+                imgs[count].transform.localScale = Vector3.one * 0.25f;//* Mathf.Clamp((1000f - 10 * Vector3.Distance(Camera.main.transform.position, p.transform.position)), 0.01f, 1f);
+                /*
                 imgs[count].GetComponent<Image>().rectTransform.anchoredPosition = (Vector2)Camera.main.WorldToViewportPoint(relativePosition) - GetComponent<RectTransform>().sizeDelta / 2f;
                 texts[count].GetComponent<Text>().rectTransform.anchoredPosition = (Vector2)Camera.main.WorldToViewportPoint(relativePosition) - GetComponent<RectTransform>().sizeDelta / 2f + new Vector2(0,30);
                 texts[count].GetComponent<Text>().text = "" + (int)Vector3.Distance(Camera.main.transform.position, p.transform.position);//p.GetComponent<planetInfo>().name;//
                 Vector2 size = new Vector2(30, 30); // * (1f - Vector3.Distance(Camera.main.transform.position, p.transform.position) / 5000f);
-                imgs[count].GetComponent<Image>().rectTransform.sizeDelta = size;
+                imgs[count].GetComponent<Image>().rectTransform.sizeDelta = size;*/
                 count++;
             }
         }
@@ -70,6 +81,13 @@ public class UIOverlayController : MonoBehaviour {
         {
             if (Vector3.Distance(Camera.main.transform.position, p.transform.position) < 5000)
             {
+                Vector3 diff = p.transform.position - Camera.main.transform.position;
+                diff = diff.normalized;
+                imgs[count].transform.position = Camera.main.transform.position + diff * dist;
+                imgs[count].transform.LookAt(Camera.main.transform.position, -Vector3.up);
+                imgs[count].GetComponent<SpriteRenderer>().sprite = enem;
+                imgs[count].transform.localScale = Vector3.one * 0.25f;// * Mathf.Clamp((1000f - Vector3.Distance(Camera.main.transform.position, p.transform.position))/1000f, 0.01f, 1f);
+                /*
                 Vector3 relativePosition = Camera.main.transform.InverseTransformPoint(p.transform.position);
                 relativePosition = new Vector3(relativePosition.x, relativePosition.y, Mathf.Max(relativePosition.z, 1.0f));
                 relativePosition = Camera.main.transform.TransformPoint(relativePosition);
@@ -81,7 +99,7 @@ public class UIOverlayController : MonoBehaviour {
                 texts[count].GetComponent<Text>().rectTransform.anchoredPosition = (Vector2)Camera.main.WorldToViewportPoint(relativePosition) - GetComponent<RectTransform>().sizeDelta / 2f + new Vector2(0, 30);
                 texts[count].GetComponent<Text>().text = "" + (int)Vector3.Distance(Camera.main.transform.position, p.transform.position);//p.GetComponent<planetInfo>().name;//
                 Vector2 size = new Vector2(30, 30); // * (1f - Vector3.Distance(Camera.main.transform.position, p.transform.position) / 5000f);
-                imgs[count].GetComponent<Image>().rectTransform.sizeDelta = size;
+                imgs[count].GetComponent<Image>().rectTransform.sizeDelta = size;*/
                 count++;
             }
         }

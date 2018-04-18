@@ -391,6 +391,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1837679213486402
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4997075495887316}
+  - component: {fileID: 114060547910943774}
+  m_Layer: 0
+  m_Name: ObjOverlay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1864692198010466
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,6 +713,7 @@ Transform:
   - {fileID: 224103943191305174}
   - {fileID: 224356718229239280}
   - {fileID: 224874342981444516}
+  - {fileID: 4997075495887316}
   m_Father: {fileID: 4124755184013014}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -726,6 +743,19 @@ Transform:
   - {fileID: 4523452811566690}
   m_Father: {fileID: 4274856189332830}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4997075495887316
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1837679213486402}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4753452392687836}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &20724785535403412
 Camera:
@@ -1287,6 +1317,22 @@ MonoBehaviour:
   turningRate: 50
   speedExhaust: 0
   speedExhaustScale: 500
+--- !u!114 &114060547910943774
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1837679213486402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b1d50a04e0f00f4cbdf07a44cc2ee56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imgs: []
+  sprt: {fileID: 21300000, guid: 5801600ef8d81d74aa391dfa03663a3f, type: 3}
+  enem: {fileID: 21300000, guid: 75f86fd3367365549baca47111bfaf33, type: 3}
+  texts: []
+  dist: 5
 --- !u!114 &114071540191082108
 MonoBehaviour:
   m_ObjectHideFlags: 1
