@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EnemyState {Inactive,Search,Wander,Sniff,LowAlert};
+
 
 public class EnemyAI : MonoBehaviour {
 
@@ -28,8 +30,7 @@ public class EnemyAI : MonoBehaviour {
     private Quaternion _lookRotation;
 
     public float killRadius;
-    public enum EnemyState {Inactive,Search,Wander,Sniff,LowAlert};
-	EnemyState curState;
+ 	EnemyState curState;
     public int playerKill;
  	public Transform loc;
     public GameObject play;
@@ -38,19 +39,17 @@ public class EnemyAI : MonoBehaviour {
     public List<Tuple<int,GameObject>> playerIDs;
 
     // colors!
-    public Renderer cone;
     public SpriteRenderer eye;
-    public GameObject idleParticles;
-    public GameObject alertParticles;
     public Color idleColor = new Color(1f, 1f, 1f, 1f); // 41B881FF
     public Color alertColor = new Color(1f, 1f, 1f, 1f); // D41E56
     public float originDistance;
 
+    public EnemyColorRemote enemyRemote;
+
     void Start(){
         loc = null;
 		curState = EnemyState.Inactive;
-        Renderer rend = GetComponent<Renderer>();
-        rend.material.shader = Shader.Find("Custom/FakeVolumetricLightShader");
+        enemyRemote = GetComponent<EnemyColorRemote>();
     } 
 
 	void Update(){
@@ -66,18 +65,15 @@ public class EnemyAI : MonoBehaviour {
                 case EnemyState.Inactive:
                     //Should maybe consider not having to store the number of players? 
                     if (players.Count>0) { curState = EnemyState.Search; }
-                    // else {  StartCoroutine(waitSearch());  }
+                    //else {  StartCoroutine(waitSearch());  }
                     //else { UpdateClosestPlayer(); }
                     break;
                 case EnemyState.Search:
+                    enemyRemote.RemoteSetColor(curState);
                     FindPlayer();
                     break;
                 case EnemyState.LowAlert:
                     Patrol();
-                    cone.material.SetColor("_MyColor", idleColor);
-                    eye.color = idleColor;
-                    idleParticles.SetActive(true);
-                    alertParticles.SetActive(false);
                     break;
                 case EnemyState.Sniff: // looking for players
                     originDistance = Vector3.Distance(loc.position, Vector3.zero);
@@ -88,10 +84,6 @@ public class EnemyAI : MonoBehaviour {
                         break;
                     }
                     SniffPlayer();
-                    cone.material.SetColor("_MyColor", idleColor);
-                    eye.color = idleColor;
-                    idleParticles.SetActive(true);
-                    alertParticles.SetActive(false);
                     break;
                 case EnemyState.Wander: // chasing a player
                     originDistance = Vector3.Distance(loc.position, Vector3.zero);
@@ -104,11 +96,8 @@ public class EnemyAI : MonoBehaviour {
                     else
                     {
                         //go get em
+                        enemyRemote.RemoteSetColor(curState);
                         GoToLocation();
-                        cone.material.SetColor("_MyColor", alertColor);
-                        eye.color = alertColor;
-                        idleParticles.SetActive(false);
-                        alertParticles.SetActive(true);
                     }
                     break;
             }
@@ -218,6 +207,13 @@ public class EnemyAI : MonoBehaviour {
             //Debug.LogWarning("I. ENEMY CALLING KILL PLAYER");
             //playerKill = playerIDs[System.Array.IndexOf(players,loc.gameObject)];
             GameObject pl = loc.gameObject;
+            foreach (var tup in playerIDs)
+            {
+                if (GameObject.ReferenceEquals(pl,tup.Second))
+                {
+                    playerKill = tup.First;
+                }
+            }
             pl.GetComponent<KillPlayerRemote>().killPlayer(playerKill);
             curState = EnemyState.Search;
             //Debug.LogWarning("II. ENEMY CALLED KILL PLAYER");
@@ -271,15 +267,7 @@ public class EnemyAI : MonoBehaviour {
         }
             play = closest;
             loc = closest.transform;
-            foreach (var tup in playerIDs)
-            {
-                if (tup.Second == play)
-                {
-                    playerKill = tup.First;
-                }
-            }
-
-            
+        
         
         //Setting the state to follow after; 
     }
