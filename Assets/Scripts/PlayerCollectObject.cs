@@ -31,6 +31,10 @@ public class PlayerCollectObject : MonoBehaviour {
                     hit.transform.gameObject.GetComponent<diamondControl>().destroySelf();
                     PhotonNetwork.player.SetScore(PhotonNetwork.player.GetScore() + 1);
 
+                    // cmw edited & tested
+                    GetComponent<PlayerMovement>().speedExhaust = GetComponent<PlayerMovement>().speedExhaustScale;
+                    Debug.LogError("CMW: " + GetComponent<PlayerMovement>().speedExhaust + " " + GetComponent<PlayerMovement>().speedExhaustScale);
+
                 }
             }
         }

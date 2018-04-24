@@ -24,7 +24,7 @@ public class PlayerSpeedView : MonoBehaviour
         myText.rectTransform.anchoredPosition3D = Vector3.up * 250;
         myText.font = ArialFont;
         myText.fontSize = 40;
-        myText.alignment = TextAnchor.MiddleRight;
+        myText.alignment = TextAnchor.UpperCenter;
 
         energyAmountMax = this.transform.parent.parent.parent.GetComponent<PlayerMovement>().speedExhaustScale;
         //energyImage = this.transform.Find("ProgressIndicator").GetComponent<Image>();

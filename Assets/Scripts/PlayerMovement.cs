@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour {
     public float turningRate = 1f;
 
     public float speedExhaust; // 100% level is speedExhaustScale
-    public float speedExhaustScale = 5000f;
+    public float speedExhaustScale = 20000f;
     private bool exhausted = false;
 
     private GameObject worldInfo;
