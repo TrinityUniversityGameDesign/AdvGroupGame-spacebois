@@ -26,8 +26,11 @@ public class collectGen : MonoBehaviour {
             {
                 spawnPos = Random.insideUnitSphere * 1000f;
                 PhotonNetwork.Instantiate(o.name, spawnPos, Quaternion.identity, 0);
-                spawnScript.enemies.Add(PhotonNetwork.Instantiate(enemy.name, spawnPos + Random.insideUnitSphere * 50f, Quaternion.identity, 0));
-                spawnScript.setEnemyPlayers();
+                if (Random.Range(0.0f,1.0f) <= 0.5f)
+                {
+                    spawnScript.enemies.Add(PhotonNetwork.Instantiate(enemy.name, spawnPos + Random.insideUnitSphere * 50f, Quaternion.identity, 0));
+                    spawnScript.setEnemyPlayers();
+                }
                 currTimer = 0;
             }
             currTimer += Time.deltaTime;
