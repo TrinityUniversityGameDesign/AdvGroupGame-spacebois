@@ -36,6 +36,7 @@ public class KillPlayerRemote : MonoBehaviour
 			StartCoroutine ("Flash");
 			gameObject.transform.position = new Vector3(0,0,0);
 			gameObject.GetComponent<PlayerMovement> ().speed = 0;
+            gameObject.GetComponent<PlayerMovement>().speedExhaust = gameObject.GetComponent<PlayerMovement>().speedExhaustScale;
 		}
 	}
 
