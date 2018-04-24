@@ -16,7 +16,9 @@ public class EnemyColorRemote : MonoBehaviour
     public SpriteRenderer eye;
     public GameObject idleParticles;
     public GameObject alertParticles;
+    public GameObject lowalertParticles;
     public Color idleColor = new Color (0.255f, 0.722f, 0.506f);
+    public Color lowAlertColor = new Color(0.990f, 0.69f, 0.1f);
     public Color alertColor = new Color (0.831f, 0.118f, 0.337f);
     public EnemyState currentState;
     public PhotonView photonView;
@@ -29,7 +31,8 @@ public class EnemyColorRemote : MonoBehaviour
         eye.color = idleColor;
 		idleParticles.SetActive(true);
         alertParticles.SetActive(false);
-     }  
+        lowalertParticles.SetActive(false);
+    }  
 
 
      [PunRPC]
@@ -45,13 +48,22 @@ public class EnemyColorRemote : MonoBehaviour
                 eye.color = idleColor;
 				idleParticles.SetActive(true);
                 alertParticles.SetActive(false);
-        		break;
-        	case EnemyState.Wander:
+                lowalertParticles.SetActive(false);
+                break;
+            case EnemyState.Sniff:
+                cone.material.SetColor("_MyColor", lowAlertColor);
+                eye.color = lowAlertColor;
+                idleParticles.SetActive(false);
+                alertParticles.SetActive(false);
+                lowalertParticles.SetActive(true);
+                break;
+            case EnemyState.Wander:
 				cone.material.SetColor("_MyColor", alertColor);
                 eye.color = alertColor;
 				idleParticles.SetActive(false);
                 alertParticles.SetActive(true);
-        		break;
+                lowalertParticles.SetActive(false);
+                break;
         	default:
         		break;
         }

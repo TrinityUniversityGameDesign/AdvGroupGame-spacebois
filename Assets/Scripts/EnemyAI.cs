@@ -41,6 +41,7 @@ public class EnemyAI : MonoBehaviour {
     // colors!
     public SpriteRenderer eye;
     public Color idleColor = new Color(1f, 1f, 1f, 1f); // 41B881FF
+    public Color lowalertColor = new Color(1f, 1f, 1f, 1f); // FFB000
     public Color alertColor = new Color(1f, 1f, 1f, 1f); // D41E56
     public float originDistance;
 
@@ -76,6 +77,7 @@ public class EnemyAI : MonoBehaviour {
                     Patrol();
                     break;
                 case EnemyState.Sniff: // looking for players
+                    enemyRemote.RemoteSetColor(curState);
                     originDistance = Vector3.Distance(loc.position, Vector3.zero);
                     if (originDistance < 12.5) // if theyre in the safe zone....
                     {
@@ -159,7 +161,7 @@ public class EnemyAI : MonoBehaviour {
                 }
 
             }
-            if (Vector3.Distance(transform.position, loc.position) < 100f)
+            if (Vector3.Distance(transform.position, loc.position) < 125)
             {
                 startSniff = false;
                 curState = EnemyState.Sniff;
