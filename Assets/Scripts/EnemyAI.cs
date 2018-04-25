@@ -146,7 +146,7 @@ public class EnemyAI : MonoBehaviour {
                 }
 
             }
-            if (loc != null && Vector3.Distance(transform.position, loc.position) < 125)
+            if (loc != null && Vector3.Distance(transform.position, loc.position) < 175)
             {
                 startSniff = false;
                 curState = EnemyState.Sniff;
@@ -154,7 +154,7 @@ public class EnemyAI : MonoBehaviour {
             }
         }
         else {
-            patrolPoint = Random.insideUnitSphere * Random.Range(100f, 900f);
+            patrolPoint = Random.insideUnitSphere * Random.Range(250f, 1300f);
             time = 0;
             SetRandomTime();
             targetX = Random.Range(patrolPoint.x - radiusLook, patrolPoint.x + radiusLook);
@@ -313,6 +313,11 @@ public class EnemyAI : MonoBehaviour {
                 curState = EnemyState.Wander;
                 enemySoundRemote.RemotePlaySound(curState);
 
+            }
+            if (Vector3.Distance(transform.position, loc.position) > 200f || IsPlayerInVisionCone())
+            {
+                print("Enemy has lost the player's trail");
+                curState = EnemyState.Search;
             }
         }
     }

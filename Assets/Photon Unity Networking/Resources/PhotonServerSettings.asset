@@ -38,4 +38,6 @@ MonoBehaviour:
   - RequestForPickupTimes
   - setDead
   - destroySelf
+  - EnemyPlaySound
+  - EnemySetColor
   DisableAutoOpenWizard: 1
