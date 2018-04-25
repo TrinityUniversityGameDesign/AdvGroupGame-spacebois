@@ -45,11 +45,14 @@ public class EnemyAI : MonoBehaviour {
     public Color alertColor = new Color(1f, 1f, 1f, 1f); // D41E56
 
     public float originDistance;
-    public EnemyColorRemote enemyRemote; 
+    public EnemyColorRemote enemyRemote;
+    public EnemySoundRemote enemySoundRemote;
+
     void Start(){
         loc = null;
 		curState = EnemyState.Inactive;
         enemyRemote = GetComponent<EnemyColorRemote>();
+        enemySoundRemote = GetComponent<EnemySoundRemote>();
     } 
 
 	void Update(){
@@ -147,6 +150,7 @@ public class EnemyAI : MonoBehaviour {
             {
                 startSniff = false;
                 curState = EnemyState.Sniff;
+                enemySoundRemote.RemotePlaySound(curState);
             }
         }
         else {
@@ -307,6 +311,7 @@ public class EnemyAI : MonoBehaviour {
                 //Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), 10, 1 << 8) || -- Maybe someday
                 print("Enemy can see the player");
                 curState = EnemyState.Wander;
+                enemySoundRemote.RemotePlaySound(curState);
 
             }
         }
