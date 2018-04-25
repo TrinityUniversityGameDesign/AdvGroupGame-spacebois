@@ -43,10 +43,9 @@ public class EnemyAI : MonoBehaviour {
     public Color idleColor = new Color(1f, 1f, 1f, 1f); // 41B881FF
     public Color lowalertColor = new Color(1f, 1f, 1f, 1f); // FFB000
     public Color alertColor = new Color(1f, 1f, 1f, 1f); // D41E56
+
     public float originDistance;
-
-    public EnemyColorRemote enemyRemote;
-
+    public EnemyColorRemote enemyRemote; 
     void Start(){
         loc = null;
 		curState = EnemyState.Inactive;
@@ -58,7 +57,8 @@ public class EnemyAI : MonoBehaviour {
         {
             float enemoriginDistance = Vector3.Distance(transform.position, Vector3.zero);
             if(enemoriginDistance < 25){
-                transform.position =  new Vector3(transform.position.x+Random.Range(15f,20f), transform.position.y+Random.Range(15f,20f),transform.position.z+Random.Range(15f,20f));
+                int posOrNeg = (Random.Range(0, 1) * 2 - 1);
+                transform.position =  new Vector3(transform.position.x+(posOrNeg)*Random.Range(100f,200f), transform.position.y+(posOrNeg)*Random.Range(100f,200f),transform.position.z+(posOrNeg)*Random.Range(100f,200f));
             }
 
             switch (curState)
@@ -78,29 +78,11 @@ public class EnemyAI : MonoBehaviour {
                     break;
                 case EnemyState.Sniff: // looking for players
                     enemyRemote.RemoteSetColor(curState);
-                    originDistance = Vector3.Distance(loc.position, Vector3.zero);
-                    if (originDistance < 12.5) // if theyre in the safe zone....
-                    {
-                        //dont get em
-                        curState = EnemyState.Search;
-                        break;
-                    }
                     SniffPlayer();
                     break;
                 case EnemyState.Wander: // chasing a player
-                    originDistance = Vector3.Distance(loc.position, Vector3.zero);
-                    if (originDistance < 12.5) // if theyre in the safe zone....
-                    {
-                        //dont get em
-                        curState = EnemyState.Search;
-                        break;
-                    }
-                    else
-                    {
-                        //go get em
-                        enemyRemote.RemoteSetColor(curState);
-                        GoToLocation();
-                    }
+                    enemyRemote.RemoteSetColor(curState);
+                    GoToLocation();
                     break;
             }
         }
@@ -161,7 +143,7 @@ public class EnemyAI : MonoBehaviour {
                 }
 
             }
-            if (Vector3.Distance(transform.position, loc.position) < 125)
+            if (loc != null && Vector3.Distance(transform.position, loc.position) < 125)
             {
                 startSniff = false;
                 curState = EnemyState.Sniff;
@@ -188,21 +170,13 @@ public class EnemyAI : MonoBehaviour {
             {
                 curState = EnemyState.Search;
             }
-            originDistance = Vector3.Distance(loc.position, Vector3.zero);
-            if (originDistance < 12.5) // if theyre in the safe zone....
-                    {
-                        //dont get em
-                        curState = EnemyState.Search;
-                    } 
-            else
-            {
-                //Should this happen every call? 
+              //Should this happen every call? 
                 transform.LookAt(loc);
                 //This definitely should be.
                 float step = speed * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, loc.position, step);
                 //Debug.Log(transform.position);
-            }
+            
         }
 		else{
 			//Setting the state to Inactive, since we have killed our target. 
@@ -237,15 +211,8 @@ public class EnemyAI : MonoBehaviour {
 	public void FindPlayer(){
         UpdateClosestPlayer();
         //Setting the state to follow after;
-        if(loc != null)
-        {
-            hasPatrol = false;
-            curState = EnemyState.LowAlert;
-        }
-        else
-        {
-            curState = EnemyState.Inactive;
-        }
+        hasPatrol = false;
+        curState = EnemyState.LowAlert;
     }
 
     public void UpdateClosestPlayer(){
