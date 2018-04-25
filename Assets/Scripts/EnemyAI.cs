@@ -60,7 +60,7 @@ public class EnemyAI : MonoBehaviour {
         {
             float enemoriginDistance = Vector3.Distance(transform.position, Vector3.zero);
             if(enemoriginDistance < 25){
-                int posOrNeg = (Random.Range(0, 1) * 2 - 1);
+                int posOrNeg = (Random.Range(0, 2) * 2 - 1);
                 transform.position =  new Vector3(transform.position.x+(posOrNeg)*Random.Range(100f,200f), transform.position.y+(posOrNeg)*Random.Range(100f,200f),transform.position.z+(posOrNeg)*Random.Range(100f,200f));
             }
 
