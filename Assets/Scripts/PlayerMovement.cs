@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour {
     public float speedExhaust; // 100% level is speedExhaustScale
     public float speedExhaustScale = 5000f;
     private bool exhausted = false;
+    public float speedRebuildScale = 50; // makes up to n speed not exhaustable
 
     private GameObject worldInfo;
     private float xBound;
@@ -72,7 +73,7 @@ public class PlayerMovement : MonoBehaviour {
         if(isMoving && !exhausted){
             transform.position = transform.position + Camera.main.transform.forward * speed * Time.deltaTime;
             //Debug.Log("Moved with speed of " + speed);
-            speedExhaust -= speed/10;
+            speedExhaust -= speed/speedRebuildScale; // cmw change orig: -= speed/10;
             if (GetComponent<PhotonView>().isMine) targetRotation = Camera.main.transform.rotation;
         }
         Debug.LogWarning("Speed Exhaust: " + speedExhaust);
