@@ -24,9 +24,9 @@ public class SpawnEnemy : MonoBehaviour
     {
        if (PhotonNetwork.isMasterClient)
         {
-            for (int i =0; i<5; i++)
+            for (int i =0; i<3; i++)
             {
-                enemies.Add(PhotonNetwork.Instantiate(enemy.name, transform.position + Random.insideUnitSphere * 300f, Quaternion.identity, 0));
+                enemies.Add(PhotonNetwork.Instantiate(enemy.name, transform.position + Random.insideUnitSphere * Random.Range(100f, 400f), Quaternion.identity, 0));
             }
             players = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player")); 
             GameObject pl = players[numPlayers];
