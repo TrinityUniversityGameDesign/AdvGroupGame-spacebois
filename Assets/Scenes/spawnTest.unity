@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 5.77
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 9ef3358d869f94a99a4033df5ad968d1, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: a952cc3f1934c4495bd9737eadd952ef, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.22633687, g: 0.25495306, b: 0.2930682, a: 1}
+  m_IndirectSpecularColor: {r: 0.112766705, g: 0.31465802, b: 0.35520977, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -113,7 +113,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &2012556261
+--- !u!1001 &372534502
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -193,6 +193,11 @@ Prefab:
     - target: {fileID: 4368397407904778, guid: 75794202dc507477cb8d28c8d3dbb0af, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861528238181442, guid: 75794202dc507477cb8d28c8d3dbb0af,
+        type: 2}
+      propertyPath: numPlanets
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 75794202dc507477cb8d28c8d3dbb0af, type: 2}
