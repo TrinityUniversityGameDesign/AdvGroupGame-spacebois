@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a306eb29d8da18c4a974d5119bd34feb
+labels:
+- Button
+- Switcher
+- Toggle
+- Lamp
+folderAsset: yes
+timeCreated: 1439164044
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

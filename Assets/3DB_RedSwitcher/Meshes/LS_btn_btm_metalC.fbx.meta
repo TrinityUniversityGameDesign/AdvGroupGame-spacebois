@@ -1,0 +1,186 @@
+fileFormatVersion: 2
+guid: 26310fdd07fc7b644b5c39501026e755
+timeCreated: 1479202964
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: bt_cc.001
+    100002: bt_cc.002
+    100004: bt_cc.003
+    100006: bt_cc.004
+    100008: bt_cc.005
+    100010: bt_cc.006
+    100012: bt_cc.007
+    100014: bt_cc.008
+    100016: bt_cc.009
+    100018: bt_cc.010
+    100020: bt_cc.011
+    100022: //RootNode
+    100024: snC_0
+    100026: snC_1
+    100028: snC_2
+    100030: snC_3
+    100032: snC_4
+    100034: snC_5
+    100036: snC_6
+    100038: snC_7
+    100040: snC_8
+    100042: snC_9
+    100044: snC_E
+    400000: bt_cc.001
+    400002: bt_cc.002
+    400004: bt_cc.003
+    400006: bt_cc.004
+    400008: bt_cc.005
+    400010: bt_cc.006
+    400012: bt_cc.007
+    400014: bt_cc.008
+    400016: bt_cc.009
+    400018: bt_cc.010
+    400020: bt_cc.011
+    400022: //RootNode
+    400024: snC_0
+    400026: snC_1
+    400028: snC_2
+    400030: snC_3
+    400032: snC_4
+    400034: snC_5
+    400036: snC_6
+    400038: snC_7
+    400040: snC_8
+    400042: snC_9
+    400044: snC_E
+    2300000: bt_cc.001
+    2300002: bt_cc.002
+    2300004: bt_cc.003
+    2300006: bt_cc.004
+    2300008: bt_cc.005
+    2300010: bt_cc.006
+    2300012: bt_cc.007
+    2300014: bt_cc.008
+    2300016: bt_cc.009
+    2300018: bt_cc.010
+    2300020: bt_cc.011
+    2300022: //RootNode
+    2300024: snC_0
+    2300026: snC_1
+    2300028: snC_2
+    2300030: snC_3
+    2300032: snC_4
+    2300034: snC_5
+    2300036: snC_6
+    2300038: snC_7
+    2300040: snC_8
+    2300042: snC_9
+    2300044: snC_E
+    3300000: bt_cc.001
+    3300002: bt_cc.002
+    3300004: bt_cc.003
+    3300006: bt_cc.004
+    3300008: bt_cc.005
+    3300010: bt_cc.006
+    3300012: bt_cc.007
+    3300014: bt_cc.008
+    3300016: bt_cc.009
+    3300018: bt_cc.010
+    3300020: bt_cc.011
+    3300022: //RootNode
+    3300024: snC_0
+    3300026: snC_1
+    3300028: snC_2
+    3300030: snC_3
+    3300032: snC_4
+    3300034: snC_5
+    3300036: snC_6
+    3300038: snC_7
+    3300040: snC_8
+    3300042: snC_9
+    3300044: snC_E
+    4300000: LS_btn_btm_metalC
+    4300002: bt_cc.011
+    4300004: snC_E
+    4300006: bt_cc.010
+    4300008: snC_0
+    4300010: bt_cc.009
+    4300012: snC_9
+    4300014: bt_cc.008
+    4300016: snC_8
+    4300018: bt_cc.007
+    4300020: snC_7
+    4300022: bt_cc.006
+    4300024: snC_6
+    4300026: bt_cc.005
+    4300028: snC_5
+    4300030: bt_cc.004
+    4300032: snC_4
+    4300034: bt_cc.003
+    4300036: snC_3
+    4300038: bt_cc.002
+    4300040: snC_2
+    4300042: bt_cc.001
+    4300044: snC_1
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.2
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
