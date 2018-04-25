@@ -179,7 +179,7 @@ public class EnemyAI : MonoBehaviour {
 
         }
         else {
-            patrolPoint = Random.insideUnitSphere * Random.Range(200f, 900f);
+            patrolPoint = Random.insideUnitSphere * Random.Range(250f, 1400f);
             time = 0;
             SetRandomTime();
             targetX = Random.Range(patrolPoint.x - radiusLook, patrolPoint.x + radiusLook);

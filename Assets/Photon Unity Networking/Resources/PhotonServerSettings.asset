@@ -38,4 +38,5 @@ MonoBehaviour:
   - RequestForPickupTimes
   - setDead
   - destroySelf
+  - EnemySetColor
   DisableAutoOpenWizard: 1
