@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScoreList : MonoBehaviour {
+public class EndScorelist : MonoBehaviour {
     public List<GameObject> texts = new List<GameObject>();
     Font ArialFont;
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         ArialFont = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         int count = 0;
-        while(texts.Count < 8)
+        while (texts.Count < 8)
         {
             GameObject t = new GameObject("txt");
             t.transform.SetParent(transform);
@@ -27,22 +29,18 @@ public class ScoreList : MonoBehaviour {
             myText.rectTransform.sizeDelta = new Vector2(500, 50);
             texts.Add(t);
         }
-		foreach(PhotonPlayer p in PhotonNetwork.playerList)
+        foreach (PhotonPlayer p in ScoreContainer.scores)
         {
-            texts[count].GetComponent<Text>().text = "Player " + p.ID + ": " + p.GetScore(); 
-            if(p.ID == PhotonNetwork.player.ID)
-            {
-                texts[count].GetComponent<Text>().color = Color.green;
-            } else
-            {
-                texts[count].GetComponent<Text>().color = Color.white;
-            }
+            texts[count].GetComponent<Text>().text = "Player " + p.ID + ": " + p.GetScore();
+            texts[count].GetComponent<Text>().color = Color.white;
+
             count += 1;
         }
-        for(int i = count; i < texts.Count; i++)
+        for (int i = count; i < 8; i++)
         {
+            //Debug.Log(i + ", " + texts.Count);
             texts[i].GetComponent<Text>().text = "";
         }
-        
-	}
+
+    }
 }

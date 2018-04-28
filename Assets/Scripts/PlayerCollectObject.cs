@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCollectObject : MonoBehaviour {
     public float raycastDist = 5f;
@@ -23,6 +24,8 @@ public class PlayerCollectObject : MonoBehaviour {
             if(PhotonNetwork.player.GetScore() >= collectGoal)
             {
                 Debug.Log("Goal Hit");
+                ScoreContainer.scores = PhotonNetwork.playerList;
+                GetComponent<PhotonView>().RPC("TransitionScreen", PhotonTargets.AllBuffered, null);
             }
             if (Physics.Raycast(transform.position, Camera.main.transform.forward, out hit, raycastDist))
             {
@@ -37,8 +40,12 @@ public class PlayerCollectObject : MonoBehaviour {
 
                 }
             }
-        }
+        }  
+    }
 
-        
+    [PunRPC]
+    void TransitionScreen()
+    {
+        SceneManager.LoadScene("EndScene");
     }
 }

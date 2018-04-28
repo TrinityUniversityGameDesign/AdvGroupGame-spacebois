@@ -23,3 +23,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DeadTest.unity
     guid: 584bab19a5f494c30b4cad6deaced0c0
+  - enabled: 1
+    path: Assets/Scenes/EndScene.unity
+    guid: ab0e0ab0ba1a8db47814c02f2ef14d9b
