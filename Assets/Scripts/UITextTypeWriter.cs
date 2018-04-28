@@ -25,18 +25,18 @@ public class UITextTypeWriter : MonoBehaviour
 		foreach (char c in story) 
 		{
 			txt.text += c;
-			yield return new WaitForSeconds (0.075f);
+			yield return new WaitForSeconds (0.04f);
 		}
 
 		yield return new WaitForSeconds (2f);
 
 		txt.text = "";
-		story = "Look around you to see your surroundings and how to control your craft...";
+		story = "Look around to see your surroundings and how to control your craft...";
 
 			foreach (char c in story) 
 			{
 				txt.text += c;
-				yield return new WaitForSeconds (0.075f);
+				yield return new WaitForSeconds (0.04f);
 			}
 
 		yield return new WaitForSeconds (2f);
@@ -47,7 +47,7 @@ public class UITextTypeWriter : MonoBehaviour
 			foreach (char c in story) 
 			{
 				txt.text += c;
-				yield return new WaitForSeconds (0.075f);
+				yield return new WaitForSeconds (0.04f);
 			}
 
 	}
