@@ -13,6 +13,8 @@ public class playerNetworking : MonoBehaviour {
             //GetComponent<EditorCameraMovement>().enabled = false;
             //GetComponent<Camera>().enabled = false;
             transform.GetChild(1).GetComponent<Camera>().enabled = false;
+			transform.GetChild(1).GetComponent<AudioListener> ().enabled = false;
+
             GameObject.Destroy(cockpit);
         }
         else
