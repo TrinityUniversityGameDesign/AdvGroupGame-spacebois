@@ -42,7 +42,7 @@ public class UITextTypeWriter : MonoBehaviour
 		yield return new WaitForSeconds (2f);
 
 		txt.text = "";
-		story = "When you are ready, hold your gaze at the launch button. Good luck out there...";
+		story = "When you are ready, press any button. See you space cowboy...";
 
 			foreach (char c in story) 
 			{
