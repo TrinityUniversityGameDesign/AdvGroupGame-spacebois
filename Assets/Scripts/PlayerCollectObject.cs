@@ -21,7 +21,7 @@ public class PlayerCollectObject : MonoBehaviour {
 
         if (GetComponent<PhotonView>().isMine)
         {
-            if(PhotonNetwork.player.GetScore() >= 1)
+            if(PhotonNetwork.player.GetScore() >= collectGoal)
             {
                 Debug.Log("Goal Hit");
                 ScoreContainer.scores = PhotonNetwork.playerList;
