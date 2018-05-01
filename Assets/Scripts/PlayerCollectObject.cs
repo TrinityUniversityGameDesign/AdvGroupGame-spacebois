@@ -25,7 +25,8 @@ public class PlayerCollectObject : MonoBehaviour {
             {
                 Debug.Log("Goal Hit");
                 ScoreContainer.scores = PhotonNetwork.playerList;
-                GetComponent<PhotonView>().RPC("TransitionScreen", PhotonTargets.AllBuffered, null);
+                GetComponent<PhotonView>().RPC("TransitionScreen", PhotonTargets.AllViaServer, null);
+                PhotonNetwork.SendOutgoingCommands();
             }
             if (Physics.Raycast(transform.position, Camera.main.transform.forward, out hit, raycastDist))
             {
@@ -37,7 +38,6 @@ public class PlayerCollectObject : MonoBehaviour {
                     // cmw edited & tested
                     GetComponent<PlayerMovement>().speedExhaust = GetComponent<PlayerMovement>().speedExhaustScale;
                     Debug.LogError("CMW: " + GetComponent<PlayerMovement>().speedExhaust + " " + GetComponent<PlayerMovement>().speedExhaustScale);
-
                 }
             }
         }  
@@ -46,6 +46,18 @@ public class PlayerCollectObject : MonoBehaviour {
     [PunRPC]
     void TransitionScreen()
     {
+        if(PhotonNetwork.isMasterClient){
+            StartCoroutine(MasterClientSceneWait());
+        }
+        else{
+            SceneManager.LoadScene("EndScene");
+        }
+    }
+
+    IEnumerator MasterClientSceneWait(){
+        Debug.Log("Waiting for All players to leave");
+        yield return new WaitUntil(() => PhotonNetwork.playerList.Length == 1);
+        Debug.Log("Server is now loading scene");
         SceneManager.LoadScene("EndScene");
     }
 }

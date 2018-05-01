@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class EndScorelist : MonoBehaviour {
     public List<GameObject> texts = new List<GameObject>();
@@ -16,7 +17,7 @@ public class EndScorelist : MonoBehaviour {
     void Update()
     {
         int count = 0;
-        while (texts.Count < 8)
+        while (texts.Count < 10)
         {
             GameObject t = new GameObject("txt");
             t.transform.SetParent(transform);
@@ -36,10 +37,17 @@ public class EndScorelist : MonoBehaviour {
 
             count += 1;
         }
+        texts[8].GetComponent<Text>().text = "Press any Button";
+        texts[9].GetComponent<Text>().text = "To restart";
         for (int i = count; i < 8; i++)
         {
             //Debug.Log(i + ", " + texts.Count);
             texts[i].GetComponent<Text>().text = "";
+        }
+        
+
+        if(Input.touchCount == 1 || Input.GetKeyDown(KeyCode.S)){
+                SceneManager.LoadScene ("Main Menu");
         }
 
     }
